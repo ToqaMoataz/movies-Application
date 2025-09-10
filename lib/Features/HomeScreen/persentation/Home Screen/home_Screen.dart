@@ -28,7 +28,7 @@ class HomeScreen extends StatelessWidget {
               extendBody: true,
               body: returnTab(HomeCubit.get(context).state.currTabIndex),
               bottomNavigationBar: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                 child: Container(
                   decoration: BoxDecoration(
                     color: AppColors.getDarkerPrimaryColor(),
