@@ -5,8 +5,8 @@ import '../../domain/helper/preferences_helper.dart';
 import 'Onboarding_Page.dart';
 
 class IntroductionScreen extends StatefulWidget {
-  static const String routeName = "introductionscreen";
-  IntroductionScreen({super.key});
+  static const String routeName = "introductionScreen";
+  const IntroductionScreen({super.key});
 
   @override
   State<IntroductionScreen> createState() => _IntroductionScreenState();
@@ -16,18 +16,14 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
   PageController pageController = PageController();
   int currentIndex = 0;
   void goToNextPage() {
-    if (currentIndex < OnBoarding_Data.OnBoardingList.length - 1) {
-      pageController.nextPage(
+    pageController.nextPage(
         duration: Duration(milliseconds: 300),
         curve: Curves.easeIn,
-      );
-    } else {
-      print("Last page reached");
-    }
+    );
   }
 
   void onButtonPressed() async {
-    if (currentIndex < OnBoarding_Data.OnBoardingList.length - 1) {
+    if (currentIndex < onBoardingData.onBoardingList.length - 1) {
       goToNextPage();
     } else {
       await PreferencesHelper.setOnboardingSeen();
@@ -36,7 +32,7 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
         rootNavigator: true,
       ).pushReplacementNamed(LoginScreen.routeName);
       // TO Do آخر صفحة → Finish
-      print("Finish pressed!");
+      // print("Finish pressed!");
     }
   }
 
@@ -46,8 +42,6 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
         duration: Duration(milliseconds: 300),
         curve: Curves.easeIn,
       );
-    } else {
-      print("Last page reached");
     }
   }
 
@@ -70,14 +64,14 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
           Expanded(
             child: PageView.builder(
               controller: pageController,
-              itemCount: OnBoarding_Data.OnBoardingList.length,
-              itemBuilder: (context, index) => Onboardingpage(
-                onboardingdata: OnBoarding_Data.OnBoardingList[index],
+              itemCount: onBoardingData.onBoardingList.length,
+              itemBuilder: (context, index) => OnboardingPage(
+                onboardingData: onBoardingData.onBoardingList[index],
                 pageIndex: index,
                 onButtonPressed: onButtonPressed,
                 buttonText: index == 0
                     ? "Explore Now"
-                    : index == OnBoarding_Data.OnBoardingList.length - 1
+                    : index == onBoardingData.onBoardingList.length - 1
                     ? "Finish"
                     : "Next",
                 onBackPressed: (currentIndex == 1 || currentIndex == 0)

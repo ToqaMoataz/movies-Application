@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/Core/Theme/app_colors.dart';
 import 'package:movie_app/Features/onboarding/data/Onboarding_Data.dart';
 
-class Onboardingpage extends StatelessWidget {
-  const Onboardingpage({
+class OnboardingPage extends StatelessWidget {
+  const OnboardingPage({
     super.key,
-    required this.onboardingdata,
+    required this.onboardingData,
     this.onButtonPressed,
     this.onBackPressed,
     this.buttonText,
     this.pageIndex,
   });
-  final OnBoarding_Data onboardingdata;
+  final onBoardingData onboardingData;
   final VoidCallback? onButtonPressed;
   final VoidCallback? onBackPressed;
   final String? buttonText;
@@ -24,7 +25,7 @@ class Onboardingpage extends StatelessWidget {
       alignment: Alignment.bottomCenter,
       children: [
         Positioned.fill(
-          child: Image.asset(onboardingdata.imagepath, fit: BoxFit.cover),
+          child: Image.asset(onboardingData.imagepath, fit: BoxFit.cover),
         ),
         Positioned(
           bottom: 0,
@@ -38,14 +39,14 @@ class Onboardingpage extends StatelessWidget {
                     gradient: LinearGradient(
                       colors: [
                         Colors.transparent,
-                        Color(0xff121312).withOpacity(0.10),
-                        Color(0xff121312),
+                        AppColors.getBackgroundColor().withOpacity(0.10),
+                        AppColors.getBackgroundColor(),
                       ],
                     ),
                     borderRadius: BorderRadius.circular(16),
                   )
                 : BoxDecoration(
-                    color: Color(0xff121312),
+                    color: AppColors.getBackgroundColor(),
                     borderRadius: BorderRadius.circular(16),
                   ),
             padding: EdgeInsets.all(screenWidth * 0.04),
@@ -55,7 +56,7 @@ class Onboardingpage extends StatelessWidget {
               children: [
                 Text(
                   textAlign: TextAlign.center,
-                  onboardingdata.title,
+                  onboardingData.title,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: screenHeight * 0.03,
@@ -63,10 +64,10 @@ class Onboardingpage extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: screenHeight * 0.02),
-                if (onboardingdata.sub_title != null)
+                if (onboardingData.sub_title != null)
                   Text(
                     textAlign: TextAlign.start,
-                    onboardingdata.sub_title!,
+                    onboardingData.sub_title!,
                     style: TextStyle(color: Colors.white, fontSize: 18),
                   ),
                 SizedBox(height: screenHeight * 0.05),
@@ -74,16 +75,16 @@ class Onboardingpage extends StatelessWidget {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: onButtonPressed,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xffF6BD00),
+                      minimumSize: Size(double.infinity, screenHeight * 0.07),
+                    ),
                     child: Text(
                       buttonText ?? "Next",
                       style: TextStyle(
                         fontSize: screenHeight * 0.03,
                         color: Colors.black,
                       ),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xffF6BD00),
-                      minimumSize: Size(double.infinity, screenHeight * 0.07),
                     ),
                   ),
                 ),
@@ -93,16 +94,16 @@ class Onboardingpage extends StatelessWidget {
                         width: double.infinity,
                         child: ElevatedButton(
                           onPressed: onBackPressed,
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: AppColors.getBackgroundColor(),
+                            side: BorderSide(color: AppColors.getAccentColor()),
+                          ),
                           child: Text(
                             "back",
                             style: TextStyle(
                               fontSize: screenHeight * 0.03,
-                              color: Color(0xffF6BD00),
+                              color: AppColors.getAccentColor(),
                             ),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xff121312),
-                            side: BorderSide(color: Color(0xffF6BD00)),
                           ),
                         ),
                       )

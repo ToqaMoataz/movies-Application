@@ -126,18 +126,10 @@ class _SearchTabState extends State<SearchTab> {
                   ),
                   itemCount: movies.length,
                   itemBuilder: (context, index) {
-                    return GestureDetector(
-                      onTap: () {
-                        Navigator.pushNamed(
-                          context,
-                          MovieDetailsScreen.routeName,
-                          arguments: movies[index].id,
-                        );
-                      },
-                      child: MovieCard(
-                        imgURL: movies[index].mediumCoverImage ?? "",
-                        rating: movies[index].rating ?? 0.0,
-                      ),
+                    return MovieCard(
+                      imgURL: movies[index].mediumCoverImage ?? "",
+                      rating: movies[index].rating ?? 0.0,
+                      movieId: movies[index].id ?? 0,
                     );
                   },
                 );

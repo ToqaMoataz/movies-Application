@@ -33,18 +33,10 @@ class MovieSuggestionsComponent extends StatelessWidget {
           itemCount: suggestion.movies!.length,
           itemBuilder: (context, index) {
             final movie = suggestion.movies![index];
-            return GestureDetector(
-              onTap: (){
-                Navigator.pushNamed(
-                  context,
-                  MovieDetailsScreen.routeName,
-                  arguments: movie.id,
-                );
-              },
-              child: MovieCard(
-                rating: movie.rating ?? 0.0,
-                imgURL: movie.mediumCoverImage ?? "",
-              ),
+            return MovieCard(
+              rating: movie.rating ?? 0.0,
+              imgURL: movie.mediumCoverImage ?? "",
+              movieId: movie.id ?? 0,
             );
           },
         );

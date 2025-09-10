@@ -365,8 +365,9 @@ class _ProfileScreenState extends State<ProfileTab>
                                               .toWatchMoviesResponse![index]
                                               .data.movie;
                                           return MovieCard(
-                                            rating: movie.rating,
-                                            imgURL: movie.mediumCoverImage,
+                                            rating: movie.rating ?? 0.0,
+                                            imgURL: movie.mediumCoverImage ?? "",
+                                            movieId: movie.id ?? 0,
                                           );
                                         },
                                       ),
@@ -409,8 +410,9 @@ class _ProfileScreenState extends State<ProfileTab>
                                               .historyMoviesResponse![index]
                                               .data.movie;
                                           return MovieCard(
-                                            rating: movie.rating,
-                                            imgURL: movie.mediumCoverImage,
+                                            rating: movie.rating ?? 0.0,
+                                            imgURL: movie.mediumCoverImage ?? "",
+                                            movieId: movie.id ?? 0,
                                           );
                                         },
                                       ),

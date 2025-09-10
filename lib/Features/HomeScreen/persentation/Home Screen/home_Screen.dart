@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:movie_app/Core/Hive/hive_manager.dart';
 
 import '../../../../Core/Theme/app_colors.dart';
 import '../../domain/movie repository/movie_remote_repo_imp.dart';
@@ -25,7 +26,6 @@ class HomeScreen extends StatelessWidget {
           builder: (context,state){
             return Scaffold(
               extendBody: true,
-              backgroundColor: AppColors.getBackgroundColor(),
               body: returnTab(HomeCubit.get(context).state.currTabIndex),
               bottomNavigationBar: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),

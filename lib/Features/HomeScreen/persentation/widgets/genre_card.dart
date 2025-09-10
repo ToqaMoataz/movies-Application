@@ -66,14 +66,9 @@ class GenreCard extends StatelessWidget {
                 final movie = movies[index];
                 return Padding(
                   padding: const EdgeInsets.only(right: 16),
-                  child: GestureDetector(
-                    onTap: (){
-                      Navigator.pushNamed(context, MovieDetailsScreen.routeName,arguments: movie.id);
-                    },
-                    child: MovieCard(
-                      rating: movie.rating ?? 0.0,
-                      imgURL: movie.mediumCoverImage ?? "",
-                    ),
+                  child: MovieCard(
+                    rating: movie.rating ?? 0.0,
+                    imgURL: movie.mediumCoverImage ?? "", movieId: movie.id ?? 0,
                   ),
                 );
               },

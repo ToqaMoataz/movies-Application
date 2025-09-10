@@ -11,7 +11,7 @@ import 'forget_password_connector.dart';
 import 'forget_password_viewModel.dart';
 
 class ForgetPasswordScreen extends StatefulWidget {
-  static const String routeName = "/login/forgetPasswordScreen";
+  static const String routeName = "forgetPasswordScreen";
   const ForgetPasswordScreen({super.key});
 
   @override

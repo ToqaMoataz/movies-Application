@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:movie_app/Core/Firebase/firebase_manager.dart';
+import 'package:movie_app/Core/Hive/hive_manager.dart';
 import 'package:movie_app/Core/Models/user_model.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -68,46 +69,42 @@ class MovieDetailsRepoImp extends MovieDetailsRepo {
     }
   }
   //update watch List and history
+  @override
   Future<void> updateUserList(String listName, int id,bool isAdd) async {
   try {
     final userId = FirebaseAuth.instance.currentUser?.uid;
     if (userId == null) return;
-
     final docRef = FirebaseManager.usersCollection().doc(userId);
-
     final snapshot = await docRef.get();
     if (!snapshot.exists) {
-      print("❌ User document not found");
       return;
     }
-
     UserModel? user = snapshot.data();
     if (user == null) return;
-
     List<int> currentList;
     if (listName == "history") {
       currentList = List.from(user.historyList ?? []);
+      await HiveManager.addToList("history", id);
     } else if (listName == "toWatchList") {
       currentList = List.from(user.toWatchList ?? []);
+      await HiveManager.addToList("toWatchList", id);
     } else {
       return;
     }
-
     if (isAdd) {
       if (!currentList.contains(id)) {
         currentList.add(id);
       }
     } else {
       currentList.remove(id);
+      await HiveManager.removeFromToWatchList(id);
     }
-
     await docRef.update({listName: currentList});
     print("✅ $listName updated → $currentList");
   } on FirebaseAuthException catch (e) {
     rethrow;
   }
 }
-
 
 
   /////////// Movie_Parental_Guides

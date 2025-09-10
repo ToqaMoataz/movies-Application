@@ -6,12 +6,14 @@ class HiveManager {
     box = await Hive.openBox('userBox');
   }
 
-  static Future<void> addToWatchList(int movieId) async {
-    List<int> currentList = box.get('toWatchList', defaultValue: <int>[])?.cast<int>() ?? [];
+  static Future<void> addToList(String listName, int movieId) async {
+    List<int> currentList = box.get(listName, defaultValue: <int>[])?.cast<int>() ?? [];
+
     if (!currentList.contains(movieId)) {
       currentList.add(movieId);
     }
-    await box.put('toWatchList', currentList);
+
+    await box.put(listName, currentList);
   }
 
   static Future<void> removeFromToWatchList(int movieId) async {
@@ -20,9 +22,9 @@ class HiveManager {
     if (currentList.contains(movieId)) {
       currentList.remove(movieId);
       await box.put('toWatchList', currentList);
-      print("✅ Removed $movieId → $currentList");
+      //print("✅ Removed $movieId → $currentList");
     } else {
-      print("⚠️ $movieId not found in list");
+      // print("⚠️ $movieId not found in list");
     }
   }
 

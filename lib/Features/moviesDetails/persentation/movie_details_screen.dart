@@ -26,6 +26,9 @@ class MovieDetailsScreen extends StatelessWidget {
         child: BlocConsumer<MovieDetailsCubit,MovieDetailsStates>(
             builder: (context,state){
               MovieDetailsCubit.get(context).addToList('history',movieId,true);
+              print("Exists >>>>>>>>> ${HiveManager.isMovieInToWatchList(movieId)}");
+              print("current ID: $movieId");
+              print("ToWatch List"); HiveManager.printToWatchList();
               var movie=MovieDetailsCubit.get(context).state.movieResponse?.data.movie;
               if (state.movieRequestState == RequestState.loading || state.suggestionsRequestState == RequestState.loading){
                 return Center(child: CircularProgressIndicator(color: AppColors.getAccentColor(),));
@@ -88,9 +91,9 @@ class MovieDetailsScreen extends StatelessWidget {
                                             onPressed: (){
                                               HiveManager.printToWatchList();
                                               MovieDetailsCubit.get(context).toggleBookmark();
-                                              MovieDetailsCubit.get(context).addToList( 'toWatchList',movieId,MovieDetailsCubit.get(context).state.bookMarkTabbed);
+                                              MovieDetailsCubit.get(context).addToList( 'toWatchList',movieId,(MovieDetailsCubit.get(context).state.bookMarkTabbed || HiveManager.isMovieInToWatchList(movieId)));
                                             },
-                                            icon: Icon(Icons.bookmark,color:(MovieDetailsCubit.get(context).state.bookMarkTabbed) ? AppColors.getAccentColor() : AppColors.getIconColor(),size: 35,),
+                                            icon: Icon(Icons.bookmark,color:(MovieDetailsCubit.get(context).state.bookMarkTabbed || HiveManager.isMovieInToWatchList(movieId)) ? AppColors.getAccentColor() : AppColors.getIconColor(),size: 35,),
                                           ),
                                         ],
                                       ),

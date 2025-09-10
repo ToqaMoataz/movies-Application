@@ -16,7 +16,7 @@ import '../../../../Core/Theme/app_colors.dart';
 import '../Login Screen/login_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
-  static const String routeName = "/registerScreen";
+  static const String routeName = "registerScreen";
 
   const RegisterScreen({super.key});
 
@@ -25,7 +25,7 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends BaseView<RegisterScreen,RegisterViewModel> implements RegisterConnector {
-  String avatar="new_avatar";
+  String avatar="Avatar";
   int _currentIndex = 0;
   late String _selectedImage;
   final _formKey = GlobalKey<FormState>();

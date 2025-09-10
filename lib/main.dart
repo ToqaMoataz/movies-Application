@@ -32,13 +32,12 @@ void main() async {
   );
 
   bool initialOnboardingSeen = await PreferencesHelper.isOnboardingSeen();
-  String user = FirebaseAuth.instance.currentUser.toString() ;
+  User? user = FirebaseAuth.instance.currentUser;
 
   String initialRoute;
   if (!initialOnboardingSeen) {
     initialRoute = IntroductionScreen.routeName;
-  } else if (user.isEmpty) {
-    print(user);
+  } else if (user!=null) {
     initialRoute = HomeScreen.routeName;
   } else {
     initialRoute = LoginScreen.routeName;

@@ -55,10 +55,6 @@ class MovieDetailsCubit extends Cubit<MovieDetailsStates> {
 
   Future<void> addToList(String listName,int movieId,bool isAdd) async {
     try{
-      if(isAdd){
-        await HiveManager.addToWatchList(movieId);
-      }
-      else{await HiveManager.removeFromToWatchList(movieId);}
      await repo.updateUserList(listName,movieId,isAdd);
     }catch(e){
       print(e.toString());
