@@ -2,12 +2,13 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_app/Core/assets/App%20Components/movie_card.dart';
 import 'package:movie_app/Features/HomeScreen/persentation/widgets/genre_card.dart';
 import '../../../../../../Core/Theme/app_colors.dart';
 import '../../../../../../Core/assets/app_images.dart';
 import '../../../../../moviesDetails/persentation/movie_details_screen.dart';
-import '../../../../data/local_data.dart';
+import '../../../../data/Data Source/local_data.dart';
 import '../../../HomeScreen cubit/cubit.dart';
 import '../../../HomeScreen cubit/state.dart';
 
@@ -41,8 +42,18 @@ class _HomeTabState extends State<HomeTab> {
             ),
           );
         }
-
-        return SingleChildScrollView(
+        else if (state.recentMoviesRequestState == RequestState.error ||
+            state.moviesByGenreRequestState == RequestState.error) {
+          return Center(
+              child: Text("Data cannot be reached",style: GoogleFonts.inter(
+                  fontSize: 16.sp,
+                  color: AppColors.getAccentColor(),
+                  fontWeight: FontWeight.w700
+              ),)
+          );
+        }
+        else{
+          return SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -52,11 +63,11 @@ class _HomeTabState extends State<HomeTab> {
                       child: Opacity(
                         opacity: 0.3,
                         child: state.carouselBackgroundImg != null
-                          ? Image.network(
-                              cubit.state.carouselBackgroundImg!,
-                              fit: BoxFit.cover,
-                          )
-                          : Container(color: Colors.black), // fallback
+                            ? Image.network(
+                          cubit.state.carouselBackgroundImg!,
+                          fit: BoxFit.cover,
+                        )
+                            : Container(color: Colors.black), // fallback
                       ),
                     ),
                     SizedBox(height: 8.h),
@@ -108,7 +119,7 @@ class _HomeTabState extends State<HomeTab> {
                     final genreMap = state.moviesByGenreList[index];
                     final genre = genreMap.entries.first.key;
                     final response = genreMap.entries.first.value;
-                     int genreIndex=AppData.getMoviesGenres().indexOf(genre);
+                    int genreIndex=AppData.getMoviesGenres().indexOf(genre);
                     return Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 12),
                       child: GenreCard(
@@ -127,6 +138,8 @@ class _HomeTabState extends State<HomeTab> {
               ],
             ),
           );
+        }
+
       },
     );
   }

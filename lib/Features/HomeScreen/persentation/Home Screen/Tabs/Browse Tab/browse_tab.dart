@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_app/Core/Theme/app_colors.dart';
 import '../../../../../../../Core/assets/App Components/movie_card.dart';
 import '../../../../../moviesDetails/persentation/movie_details_screen.dart';
-import '../../../../data/local_data.dart';
+import '../../../../data/Data Source/local_data.dart';
 import '../../../HomeScreen cubit/cubit.dart';
 import '../../../HomeScreen cubit/state.dart';
 

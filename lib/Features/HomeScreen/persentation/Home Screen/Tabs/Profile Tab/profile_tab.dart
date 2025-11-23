@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_app/Core/Theme/app_colors.dart';
 import 'package:movie_app/Core/assets/App%20Components/movie_card.dart';
-import '../../../../../Authentication/persentation/Login Screen/login_screen.dart';
+import '../../../../../Authentication/persentation/Screens/Login Screen/login_screen.dart';
 import '../../../../../Update and Delete profile/persentation/Update Profile Screen/update_profile_screen.dart';
 import '../../../HomeScreen cubit/cubit.dart';
 import '../../../HomeScreen cubit/state.dart';
@@ -491,9 +491,9 @@ class _ProfileScreenState extends State<ProfileTab>
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-                onPressed: () {
+                onPressed: () async {
                   Navigator.of(context).pop(); // close dialog
-                  cubit.signOut(); // BlocListener handles navigation
+                  await cubit.signOut();
                 },
                 child: Text(
                   "Sign out",

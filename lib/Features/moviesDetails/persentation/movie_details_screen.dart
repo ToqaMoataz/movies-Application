@@ -5,7 +5,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_app/Core/Hive/hive_manager.dart';
 import 'package:movie_app/Core/Theme/app_colors.dart';
-import '../domain/movie_details_repo.dart';
+import 'package:movie_app/Features/moviesDetails/data/Data%20Sources/dataSource.dart';
+import 'package:movie_app/Features/moviesDetails/data/Repo%20Imlementation/movie_details_repo_Imp.dart';
+import 'package:movie_app/Features/moviesDetails/domain/Use%20Cases/moviesDetails_usecases.dart';
+import '../domain/Movies Details Repo/movie_details_repo.dart';
 import 'Components/cast_component.dart';
 import 'Components/movie_suggestions_component.dart';
 import 'Components/small_info_card.dart';
@@ -15,20 +18,18 @@ import 'package:url_launcher/url_launcher.dart';
 
 
 class MovieDetailsScreen extends StatelessWidget {
-  static const String routeName="movieDetailsScreen";
+  static const String routeName=""
+      "movieDetailsScreen";
   const MovieDetailsScreen({super.key});
   @override
   Widget build(BuildContext context) {
     var movieId=ModalRoute.of(context)?.settings.arguments as int;
     return Scaffold(
       body: BlocProvider<MovieDetailsCubit>(
-        create: (context)=>MovieDetailsCubit(MovieDetailsRepoImp())..getMovieById(movieId),
+        create: (context)=>MovieDetailsCubit(MovieDetailsUseCases(MovieDetailsRepoImp(MoviesDetailsImpDs())))..getMovieById(movieId),
         child: BlocConsumer<MovieDetailsCubit,MovieDetailsStates>(
             builder: (context,state){
               MovieDetailsCubit.get(context).addToList('history',movieId,true);
-              print("Exists >>>>>>>>> ${HiveManager.isMovieInToWatchList(movieId)}");
-              print("current ID: $movieId");
-              print("ToWatch List"); HiveManager.printToWatchList();
               var movie=MovieDetailsCubit.get(context).state.movieResponse?.data.movie;
               if (state.movieRequestState == RequestState.loading || state.suggestionsRequestState == RequestState.loading){
                 return Center(child: CircularProgressIndicator(color: AppColors.getAccentColor(),));

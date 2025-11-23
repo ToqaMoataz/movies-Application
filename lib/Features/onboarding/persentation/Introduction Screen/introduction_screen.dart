@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/Features/onboarding/data/Onboarding_Data.dart';
-import '../../../Authentication/persentation/Login Screen/login_screen.dart';
+import '../../../Authentication/persentation/Screens/Login Screen/login_screen.dart';
 import '../../domain/helper/preferences_helper.dart';
 import 'Onboarding_Page.dart';
 

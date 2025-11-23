@@ -19,6 +19,7 @@ class HomeState extends HomeStates {
   List<MovieResponse>? toWatchMoviesResponse;
   List<MovieResponse>? historyMoviesResponse;
 
+
   RequestState searchMoviesRequestState;
   RequestState browseMoviesRequestState;
   RequestState profileMoviesRequestState;

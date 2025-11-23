@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movie_app/Core/Hive/hive_manager.dart';
+import 'package:movie_app/Features/HomeScreen/data/Data%20Source/movies_data_sources_impl.dart';
+import 'package:movie_app/Features/HomeScreen/data/Data%20Source/user_data_sources_impl.dart';
+import 'package:movie_app/Features/HomeScreen/data/Repo%20Implementation/user_repo_impl.dart';
+import 'package:movie_app/Features/HomeScreen/domain/Usecases/Movies%20Use%20Cases/movies_base_usecase.dart';
+import 'package:movie_app/Features/HomeScreen/domain/Usecases/User%20Use%20Cases/user_base_usecase.dart';
 
 import '../../../../Core/Theme/app_colors.dart';
-import '../../domain/movie repository/movie_remote_repo_imp.dart';
-import '../../domain/user repository/user_repo.dart';
+import '../../data/Repo Implementation/movie_remote_repo_imp.dart';
+
 import '../HomeScreen cubit/cubit.dart';
 import '../HomeScreen cubit/state.dart';
 import 'Tabs/Browse Tab/browse_tab.dart';
@@ -20,7 +23,9 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<HomeCubit>(
       create: (context) =>
-      HomeCubit(MoviesRemoteRepository(),UserRepoImp())..loadHomeTab(),
+      HomeCubit(MoviesUseCases(MoviesRemoteRepository(MoviesDataSourcesImpl())),
+          UserUseCases(UserRepoImpl(UserDataSourcesImpl())))
+        ..loadHomeTab(),
 
       child:BlocConsumer<HomeCubit,HomeStates>(
           builder: (context,state){

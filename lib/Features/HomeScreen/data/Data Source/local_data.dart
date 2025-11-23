@@ -1,0 +1,28 @@
+class AppData{
+
+  static List<String> getMoviesGenres() {
+    return [
+      "Action",
+      "Adventure",
+      "Animation",
+      "Biography",
+      "Comedy",
+      "Crime",
+      "Documentary",
+      "Drama",
+      "Family",
+      "Fantasy",
+      "History",
+      "Horror",
+      "Music",
+      "Mystery",
+      "Romance",
+      "Sci-Fi",
+      "Sport",
+      "Thriller",
+      "War",
+      "Western",
+    ];
+  }
+
+}

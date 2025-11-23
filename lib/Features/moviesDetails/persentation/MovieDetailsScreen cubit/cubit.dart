@@ -1,14 +1,15 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../Core/Hive/hive_manager.dart';
+import '../../domain/Use Cases/moviesDetails_usecases.dart';
 import 'states.dart';
 import '../../../../Core/Models/movie_model.dart';
-import '../../domain/movie_details_repo.dart';
+import '../../domain/Movies Details Repo/movie_details_repo.dart';
 import '../../../../../../Core/Models/MoviesResponse.dart';
 
 class MovieDetailsCubit extends Cubit<MovieDetailsStates> {
-  final MovieDetailsRepo repo;
-
-  MovieDetailsCubit(this.repo) : super(MovieDetailsStates());
+  // final MovieDetailsRepo repo;
+  final MovieDetailsUseCases useCases;
+  MovieDetailsCubit(this.useCases) : super(MovieDetailsStates());
 
   static MovieDetailsCubit get(context) => BlocProvider.of(context);
 
@@ -19,7 +20,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsStates> {
   Future<void> getMovieById(int id) async {
     emit(state.copyWith(movieRequestState: RequestState.loading));
     try {
-      final MovieResponse result = await repo.getMovieByID(id);
+      final MovieResponse result = await useCases.getMovieByIDUC.call(id);
       emit(state.copyWith(
         movieResponse: result,
         movieRequestState: RequestState.success,
@@ -33,7 +34,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsStates> {
   Future<void> getMovieSuggestionsById(int id) async {
     emit(state.copyWith(suggestionsRequestState: RequestState.loading));
     try {
-      final MoviesResponse suggestions = await repo.getMovieSuggestionsById(id);
+      final MoviesResponse suggestions = await useCases.getMovieSuggestionsUC.call(id);
       emit(state.copyWith(
         movieSuggestions: suggestions,
         suggestionsRequestState: RequestState.success,
@@ -46,16 +47,16 @@ class MovieDetailsCubit extends Cubit<MovieDetailsStates> {
   Future<void> goToWatchMovie(String url) async {
     try{
       emit(state.copyWith(watchMovieRequestState: RequestState.loading));
-      await repo.watchMovieFromUrl(url);
+     await useCases.watchMovieFromUrlUC.call(url);
       emit(state.copyWith(watchMovieRequestState: RequestState.success));
     }catch(e){
       emit(state.copyWith(watchMovieRequestState: RequestState.error));
     }
   }
 
-  Future<void> addToList(String listName,int movieId,bool isAdd) async {
+  Future<void> addToList(String listName,int movieId,bool isAdd)async{
     try{
-     await repo.updateUserList(listName,movieId,isAdd);
+     await useCases.updateUserListUC.call(listName,movieId,isAdd);
     }catch(e){
       print(e.toString());
     }

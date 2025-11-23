@@ -1,18 +1,17 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie_app/Features/HomeScreen/domain/user%20repository/user_repo.dart';
-import 'package:movie_app/Features/Update%20and%20Delete%20profile/domail/update_profile_repo.dart';
+import 'package:movie_app/Features/Update%20and%20Delete%20profile/domail/Edit%20Profile%20repo/update_profile_repo.dart';
+import 'package:movie_app/Features/Update%20and%20Delete%20profile/domail/Use%20Cases/updateProfile_base_usecase.dart';
 import 'package:movie_app/Features/Update%20and%20Delete%20profile/persentation/update%20and%20delete%20cubit/states.dart';
 
 import '../../../../Core/Models/user_model.dart';
-import '../../../Authentication/persentation/Login Screen/login_screen.dart';
-import '../../../HomeScreen/persentation/HomeScreen cubit/cubit.dart';
+
+import '../../../HomeScreen/domain/Abstract repo/user_repo.dart';
+
 
 class UpdateProfileCubit extends Cubit<UpdateProfileState> {
-  UserRepo userRepo;
-  UpdateProfileRepo repo;
-  UpdateProfileCubit(this.repo,this.userRepo) : super(UpdateProfileInitState());
+  UpdateProfileUseCases profileUseCases;
+  UpdateProfileCubit(this.profileUseCases) : super(UpdateProfileInitState());
   static UpdateProfileCubit get(context) => BlocProvider.of<UpdateProfileCubit>(context);
 
   void showImagesDialog(bool show) {
@@ -30,7 +29,7 @@ class UpdateProfileCubit extends Cubit<UpdateProfileState> {
   Future<void> updateUser(String name,String phoneNumber,String imageName)async{
     try {
       emit(state.copyWith(updateProfileRequestState: RequestState.loading));
-      await repo.updateUserData(name: name, phoneNumber: phoneNumber,image: imageName);
+      await profileUseCases.updateUserDataUC.call(name: name, phoneNumber: phoneNumber,image: imageName);
       emit(state.copyWith(updateProfileRequestState: RequestState.success));
     } catch (e) {
       emit(state.copyWith(
@@ -43,7 +42,7 @@ class UpdateProfileCubit extends Cubit<UpdateProfileState> {
   Future<void> deleteUser() async {
     try {
       emit(state.copyWith(deleteProfileRequestState: RequestState.loading));
-      await repo.deleteUser();
+      await profileUseCases.deleteUserUC.call();
       emit(state.copyWith(deleteProfileRequestState: RequestState.success));
     } catch (e) {
       emit(state.copyWith(
