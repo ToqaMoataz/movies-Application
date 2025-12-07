@@ -20,21 +20,4 @@ class ForgetPassCubit extends Cubit<ForgetPassState>{
   }
 
 
-  // Future<void> login({required String email, required String password}) async {
-  //   try {
-  //     emit(state.copyWith())
-  //     await usecase.callLogin(email: email, password: password);
-  //   } catch (e) {
-  //     rethrow;
-  //   }
-  // }
-  //
-  // Future<void> loginWithGoogle() async {
-  //   try {
-  //     await usecase.callLoginWithGoogle();
-  //   } catch (e) {
-  //     rethrow;
-  //   }
-  // }
-
 }
