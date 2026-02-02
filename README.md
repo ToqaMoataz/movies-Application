@@ -2,9 +2,7 @@
 
 A new Flutter project.
 
-## Getting Started
-
-# Movies Flutter Application
+## Movies Flutter Application
 
 A Flutter mobile application that allows users to discover movies, search, browse by category, and view detailed information about each movie.  
 The app provides a personalized experience by allowing users to save their watch history, manage their profile, and create a "To Watch" list.
@@ -71,6 +69,14 @@ State management is handled using Cubit.
 - User authentication is handled securely via Firebase  
 - User profile, watch history, and to-watch list are stored in Firestore  
 - Hive is used for fast local caching and offline persistence  
+
+---
+
+## Firebase Project
+
+This project uses Firebase for authentication and cloud data storage.  
+You can access the Firebase project here:  
+**[Firebase Console Project Link](https://console.firebase.google.com/u/0/project/movie-3af75/overview)**
 
 ---
 
