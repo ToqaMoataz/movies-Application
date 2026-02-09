@@ -1,8 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_app/Core/Theme/app_colors.dart';
+import 'package:movie_app/Core/assets/app_images.dart';
 import '../../../../../../../Core/assets/App Components/movie_card.dart';
 import '../../../../../moviesDetails/persentation/movie_details_screen.dart';
 import '../../../HomeScreen cubit/cubit.dart';
@@ -67,7 +69,7 @@ class _SearchTabState extends State<SearchTab> {
                         height: 1.2,
                         letterSpacing: 0),
                     decoration: InputDecoration(
-                      hintText: "Search",
+                      hintText: "search_text".tr(),
                       border: InputBorder.none,
                       hintStyle: GoogleFonts.roboto(
                           fontWeight: FontWeight.w400,
@@ -92,7 +94,7 @@ class _SearchTabState extends State<SearchTab> {
 
               if (_searchController.text.isEmpty) {
                 return Center(
-                  child: Image.asset("assets/images/empty.png"),
+                  child: Image.asset(AppImages.emptyList),
                 );
               }
 

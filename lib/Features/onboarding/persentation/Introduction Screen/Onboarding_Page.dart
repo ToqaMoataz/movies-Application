@@ -11,7 +11,7 @@ class OnboardingPage extends StatelessWidget {
     this.buttonText,
     this.pageIndex,
   });
-  final onBoardingData onboardingData;
+  final OnBoardingData onboardingData;
   final VoidCallback? onButtonPressed;
   final VoidCallback? onBackPressed;
   final String? buttonText;
@@ -25,7 +25,7 @@ class OnboardingPage extends StatelessWidget {
       alignment: Alignment.bottomCenter,
       children: [
         Positioned.fill(
-          child: Image.asset(onboardingData.imagepath, fit: BoxFit.cover),
+          child: Image.asset(onboardingData.imagePath, fit: BoxFit.cover),
         ),
         Positioned(
           bottom: 0,
@@ -64,10 +64,10 @@ class OnboardingPage extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: screenHeight * 0.02),
-                if (onboardingData.sub_title != null)
+                if (onboardingData.subTitle != null)
                   Text(
                     textAlign: TextAlign.start,
-                    onboardingData.sub_title!,
+                    onboardingData.subTitle!,
                     style: TextStyle(color: Colors.white, fontSize: 18),
                   ),
                 SizedBox(height: screenHeight * 0.05),

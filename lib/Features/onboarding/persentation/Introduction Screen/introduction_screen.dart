@@ -14,8 +14,7 @@ class IntroductionScreen extends StatefulWidget {
 
 class _IntroductionScreenState extends State<IntroductionScreen> {
   PageController pageController = PageController();
-  int currentIndex = 0;
-  void goToNextPage() {
+  int currentIndex = 0;  void goToNextPage() {
     pageController.nextPage(
         duration: Duration(milliseconds: 300),
         curve: Curves.easeIn,
@@ -23,7 +22,7 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
   }
 
   void onButtonPressed() async {
-    if (currentIndex < onBoardingData.onBoardingList.length - 1) {
+    if (currentIndex < OnBoardingData.onBoardingList.length - 1) {
       goToNextPage();
     } else {
       await PreferencesHelper.setOnboardingSeen();
@@ -31,8 +30,6 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
         context,
         rootNavigator: true,
       ).pushReplacementNamed(LoginScreen.routeName);
-      // TO Do آخر صفحة → Finish
-      // print("Finish pressed!");
     }
   }
 
@@ -64,14 +61,14 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
           Expanded(
             child: PageView.builder(
               controller: pageController,
-              itemCount: onBoardingData.onBoardingList.length,
+              itemCount: OnBoardingData.onBoardingList.length,
               itemBuilder: (context, index) => OnboardingPage(
-                onboardingData: onBoardingData.onBoardingList[index],
+                onboardingData: OnBoardingData.onBoardingList[index],
                 pageIndex: index,
                 onButtonPressed: onButtonPressed,
                 buttonText: index == 0
                     ? "Explore Now"
-                    : index == onBoardingData.onBoardingList.length - 1
+                    : index == OnBoardingData.onBoardingList.length - 1
                     ? "Finish"
                     : "Next",
                 onBackPressed: (currentIndex == 1 || currentIndex == 0)

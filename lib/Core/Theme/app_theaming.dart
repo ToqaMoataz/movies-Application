@@ -5,7 +5,6 @@ import 'package:movie_app/Core/Theme/app_colors.dart';
 
 class AppTheming{
   static ThemeData theme=ThemeData(
-
       appBarTheme: AppBarTheme(
           backgroundColor: AppColors.getBackgroundColor(),
           iconTheme: IconThemeData(
@@ -29,7 +28,9 @@ class AppTheming{
           selectedItemColor: AppColors.getAccentColor(),
           showSelectedLabels: false,
           showUnselectedLabels: false,
-          type: BottomNavigationBarType.fixed
+          type: BottomNavigationBarType.fixed,
+          elevation: 0,
+
       )
   );
 }

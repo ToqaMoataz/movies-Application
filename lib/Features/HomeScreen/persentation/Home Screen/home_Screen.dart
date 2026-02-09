@@ -44,10 +44,7 @@ class HomeScreen extends StatelessWidget {
                     child: BottomNavigationBar(
                       backgroundColor: Colors.transparent,
                       currentIndex: HomeCubit.get(context).state.currTabIndex,
-                      elevation: 0,
-                      type: BottomNavigationBarType.fixed,
-                      showSelectedLabels: false,
-                      showUnselectedLabels: false,
+
                       onTap: (value) {
                         HomeCubit.get(context).setTabIndex(value);
                       },

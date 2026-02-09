@@ -23,19 +23,21 @@ class UpdateProfileCubit extends Cubit<UpdateProfileState> {
   }
   void getUserImage(UserModel user){
     emit(state.copyWith(selectedImage: user.image));
-    print(state.selectedImage);
   }
 
   Future<void> updateUser(String name,String phoneNumber,String imageName)async{
     try {
       emit(state.copyWith(updateProfileRequestState: RequestState.loading));
+      print("Stateee : ${state.updateProfileRequestState}");
       await profileUseCases.updateUserDataUC.call(name: name, phoneNumber: phoneNumber,image: imageName);
       emit(state.copyWith(updateProfileRequestState: RequestState.success));
+      print("Stateee : ${state.updateProfileRequestState}");
     } catch (e) {
       emit(state.copyWith(
         updateProfileRequestState: RequestState.error,
         errorMessage: e.toString(),
       ));
+      print("Stateee : ${state.updateProfileRequestState}, Error Message: ${state.errorMessage}");
     }
   }
 

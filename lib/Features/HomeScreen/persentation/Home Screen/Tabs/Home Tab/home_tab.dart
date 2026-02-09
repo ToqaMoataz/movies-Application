@@ -75,7 +75,7 @@ class _HomeTabState extends State<HomeTab> {
                       children: [
                         SizedBox(height: 36.h,),
                         Image.asset(
-                          AppImages.AvailableNow,
+                          AppImages.availableNow,
                           width: double.infinity,
                           height: 50.h,
                           alignment: Alignment.center,
@@ -107,7 +107,7 @@ class _HomeTabState extends State<HomeTab> {
                             ),
                           ),
                         ),
-                        const Image(image: AssetImage(AppImages.WatchNow)),
+                        const Image(image: AssetImage(AppImages.watchNow)),
                       ],
                     ),
                   ],

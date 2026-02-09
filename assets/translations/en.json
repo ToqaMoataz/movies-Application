@@ -30,6 +30,7 @@
   "cast_text": "Cast",
   "genres_text": "Geners",
   "discription_text": "Description",
-  "similar_text" : "Similar"
+  "similar_text" : "Similar",
+  "search_text" : "Search"
 
 }

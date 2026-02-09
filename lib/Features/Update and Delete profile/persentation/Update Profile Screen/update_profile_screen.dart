@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_app/Core/Models/user_model.dart';
-import 'package:movie_app/Features/Update%20and%20Delete%20profile/domail/Edit%20Profile%20repo/update_profile_repo.dart';
+import 'package:movie_app/Features/HomeScreen/persentation/HomeScreen%20cubit/cubit.dart';
 import 'package:movie_app/Features/Update%20and%20Delete%20profile/persentation/components/dialog_to_show.dart';
 import 'package:movie_app/Features/Update%20and%20Delete%20profile/persentation/update%20and%20delete%20cubit/cubit.dart';
 import 'package:movie_app/Features/Update%20and%20Delete%20profile/persentation/update%20and%20delete%20cubit/states.dart';
@@ -15,6 +15,7 @@ import '../../../HomeScreen/persentation/Home Screen/home_Screen.dart';
 
 class UpdateProfileScreen extends StatefulWidget {
   static const String routeName = "updateProfile";
+
   const UpdateProfileScreen({super.key});
 
   @override
@@ -25,6 +26,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -35,7 +37,6 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
     phoneController.text = user.phoneNumber;
   }
 
-
   @override
   void dispose() {
     nameController.dispose();
@@ -45,31 +46,29 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var user=ModalRoute.of(context)?.settings.arguments as UserModel;
+    var user = ModalRoute.of(context)?.settings.arguments as UserModel;
     return BlocListener<UpdateProfileCubit, UpdateProfileStates>(
       listener: (context, state) {
-        if (UpdateProfileCubit.get(context)
-            .state
-            .deleteProfileRequestState ==
+        if (UpdateProfileCubit.get(context).state.deleteProfileRequestState ==
             RequestState.success) {
-          Navigator.of(context, rootNavigator: true)
-              .pushNamedAndRemoveUntil(LoginScreen.routeName, (route) => false);
+          Navigator.of(
+            context,
+            rootNavigator: true,
+          ).pushNamedAndRemoveUntil(LoginScreen.routeName, (route) => false);
         }
-        if (UpdateProfileCubit.get(context)
-            .state
-            .deleteProfileRequestState ==
+        if (UpdateProfileCubit.get(context).state.deleteProfileRequestState ==
             RequestState.error) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text("Error deleting account")),
-          );
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text("Error deleting account")));
         }
-        if (UpdateProfileCubit.get(context)
-            .state
-            .updateProfileRequestState ==
-            RequestState.error) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text("Error updating account")),
-          );
+        if (UpdateProfileCubit.get(context).state.updateProfileRequestState == RequestState.error) {
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text("Error updating account")));
+        }
+        if (UpdateProfileCubit.get(context).state.updateProfileRequestState == RequestState.success) {
+          Navigator.pushReplacementNamed(context, HomeScreen.routeName);
         }
       },
       child: BlocBuilder<UpdateProfileCubit, UpdateProfileStates>(
@@ -78,9 +77,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
 
           return Scaffold(
             resizeToAvoidBottomInset: false,
-            appBar: AppBar(
-              title: Text("pick_avatar_heading".tr()),
-            ),
+            appBar: AppBar(title: Text("pick_avatar_heading".tr())),
             body: Stack(
               children: [
                 Opacity(
@@ -89,7 +86,9 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                     onTap: () => cubit.showImagesDialog(false),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
-                          vertical: 22, horizontal: 16),
+                        vertical: 22,
+                        horizontal: 16,
+                      ),
                       child: Form(
                         key: _formKey,
                         child: Column(
@@ -105,7 +104,8 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                                     shape: BoxShape.circle,
                                     image: DecorationImage(
                                       image: AssetImage(
-                                          "assets/images/${cubit.state.selectedImage}.png"),
+                                        "assets/images/${cubit.state.selectedImage}.png",
+                                      ),
                                       fit: BoxFit.cover,
                                     ),
                                   ),
@@ -116,14 +116,19 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                             // Name TextField inlined
                             Container(
                               height: 56.h,
-                              padding: const EdgeInsets.symmetric(horizontal: 20),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 20,
+                              ),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(15.r),
                                 color: AppColors.getPrimaryColor(),
                               ),
                               child: Row(
                                 children: [
-                                  Icon(Icons.person, color: AppColors.getIconColor()),
+                                  Icon(
+                                    Icons.person,
+                                    color: AppColors.getIconColor(),
+                                  ),
                                   SizedBox(width: 16.w),
                                   Expanded(
                                     child: TextField(
@@ -141,7 +146,8 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                                         hintStyle: GoogleFonts.roboto(
                                           fontWeight: FontWeight.w400,
                                           fontSize: 16.sp,
-                                          color: AppColors.getPrimaryTextColor(),
+                                          color:
+                                              AppColors.getPrimaryTextColor(),
                                           height: 1.2,
                                         ),
                                       ),
@@ -154,14 +160,19 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                             // Phone TextField inlined
                             Container(
                               height: 56.h,
-                              padding: const EdgeInsets.symmetric(horizontal: 20),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 20,
+                              ),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(15.r),
                                 color: AppColors.getPrimaryColor(),
                               ),
                               child: Row(
                                 children: [
-                                  Icon(Icons.phone, color: AppColors.getIconColor()),
+                                  Icon(
+                                    Icons.phone,
+                                    color: AppColors.getIconColor(),
+                                  ),
                                   SizedBox(width: 16.w),
                                   Expanded(
                                     child: TextFormField(
@@ -179,12 +190,14 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                                         hintStyle: GoogleFonts.roboto(
                                           fontWeight: FontWeight.w400,
                                           fontSize: 16.sp,
-                                          color: AppColors.getPrimaryTextColor(),
+                                          color:
+                                              AppColors.getPrimaryTextColor(),
                                           height: 1.2,
                                         ),
                                       ),
                                       validator: (value) {
-                                        if (value == null || value.trim().isEmpty) {
+                                        if (value == null ||
+                                            value.trim().isEmpty) {
                                           return "Phone is required";
                                         }
                                         if (value.length < 11) {
@@ -201,7 +214,9 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                             GestureDetector(
                               onTap: () {
                                 Navigator.pushNamed(
-                                    context, ForgetPasswordScreen.routeName);
+                                  context,
+                                  ForgetPasswordScreen.routeName,
+                                );
                               },
                               child: Text(
                                 "reset_password_text".tr(),
@@ -219,10 +234,12 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                               children: [
                                 // Delete Button inlined
                                 InkWell(
-                                  onTap: () => _showDeleteDialog(context, cubit),
+                                  onTap: () =>
+                                      _showDeleteDialog(context, cubit),
                                   child: Container(
-                                    padding:
-                                    const EdgeInsets.symmetric(vertical: 16),
+                                    padding: const EdgeInsets.symmetric(
+                                      vertical: 16,
+                                    ),
                                     decoration: BoxDecoration(
                                       color: AppColors.getActionColor(),
                                       borderRadius: BorderRadius.circular(15.r),
@@ -242,12 +259,14 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                                 // Update Button inlined
                                 InkWell(
                                   onTap: () => cubit.updateUser(
-                                      nameController.text,
-                                      phoneController.text,
-                                      cubit.state.selectedImage),
+                                    nameController.text,
+                                    phoneController.text,
+                                    cubit.state.selectedImage,
+                                  ),
                                   child: Container(
-                                    padding:
-                                    const EdgeInsets.symmetric(vertical: 16),
+                                    padding: const EdgeInsets.symmetric(
+                                      vertical: 16,
+                                    ),
                                     decoration: BoxDecoration(
                                       color: AppColors.getAccentColor(),
                                       borderRadius: BorderRadius.circular(15.r),
@@ -257,7 +276,8 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                                       style: GoogleFonts.roboto(
                                         fontSize: 20.sp,
                                         fontWeight: FontWeight.w400,
-                                        color: AppColors.getSecondaryTextColor(),
+                                        color:
+                                            AppColors.getSecondaryTextColor(),
                                       ),
                                       textAlign: TextAlign.center,
                                     ),
@@ -297,10 +317,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
         backgroundColor: AppColors.getDarkerPrimaryColor(),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.r),
-          side: BorderSide(
-            color: AppColors.getAccentColor(),
-            width: 2,
-          ),
+          side: BorderSide(color: AppColors.getAccentColor(), width: 2),
         ),
         title: Text(
           "Delete Account",
@@ -334,7 +351,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
             style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
             onPressed: () {
               Navigator.of(context).pop();
-              cubit.deleteUser(); // BlocListener handles navigation
+              cubit.deleteUser();
             },
             child: Text(
               "Delete",

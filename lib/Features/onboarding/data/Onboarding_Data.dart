@@ -1,49 +1,49 @@
 import 'package:movie_app/Core/assets/app_images.dart';
 
 
-class onBoardingData {
-  String imagepath;
+class OnBoardingData {
+  String imagePath;
   String title;
-  String? sub_title;
-  onBoardingData({
+  String? subTitle;
+  OnBoardingData({
     required this.title,
-    required this.imagepath,
-    this.sub_title,
+    required this.imagePath,
+    this.subTitle,
   });
-  static List<onBoardingData> onBoardingList = [
-    onBoardingData(
+  static List<OnBoardingData> onBoardingList = [
+    OnBoardingData(
       title: "Find Your Next \n Favorite Movie Here",
-      imagepath: AppImages.Movies_posters,
-      sub_title:
+      imagePath: AppImages.moviesPosters,
+      subTitle:
           "Get access to a huge library of movies \n to suit all tastes. You will surely like it.",
     ),
-    onBoardingData(
+    OnBoardingData(
       title: "Discover Movies",
-      imagepath: AppImages.onboarding_image2,
-      sub_title:
+      imagePath: AppImages.onboardingImage2,
+      subTitle:
           "Explore a vast collection of movies in all qualities and genres. Find your next favorite film with ease.",
     ),
-    onBoardingData(
+    OnBoardingData(
       title: "Explore All Genres",
-      imagepath: AppImages.onboarding_image3,
-      sub_title:
+      imagePath: AppImages.onboardingImage3,
+      subTitle:
           "Discover movies from every genre, in all available qualities. Find something new and exciting to watch every day.",
     ),
-    onBoardingData(
+    OnBoardingData(
       title: "Create Watchlists",
-      imagepath: AppImages.onboarding_image4,
-      sub_title:
+      imagePath: AppImages.onboardingImage4,
+      subTitle:
           "Save movies to your watchlist to keep track of what you want to watch next. Enjoy films in various qualities and genres.",
     ),
-    onBoardingData(
+    OnBoardingData(
       title: "Rate, Review, and Learn",
-      imagepath: AppImages.onboarding_image5,
-      sub_title:
+      imagePath: AppImages.onboardingImage5,
+      subTitle:
           "Share your thoughts on the movies you've watched. Dive deep into film details and help others discover great movies with your reviews.",
     ),
-    onBoardingData(
+    OnBoardingData(
       title: "Start Watching Now",
-      imagepath: AppImages.onboarding_image6,
+      imagePath: AppImages.onboardingImage6,
     ),
   ];
 }
