@@ -27,11 +27,20 @@ class RegisterCubit extends Cubit<RegisterState> {
   }
 
   void setUserImage(int index){
-    state.currentIndex=index;
-    state.selectedImage=state.profileImages[state.currentIndex];
+
+    emit(state.copyWith(currentIndex: index,selectedImage: state.profileImages[index]));
   }
 
   void editUserName(String name){
-    state.avatar=name;
+    emit(state.copyWith(avatar: name));
+  }
+
+  void toggleVisibility(){
+    emit(state.copyWith(passwordVisible: !state.passwordVisible));
+  }
+
+  void toggleReVisibility(){
+    emit(state.copyWith(rePasswordVisible: !state.rePasswordVisible));
+
   }
 }

@@ -45,7 +45,7 @@ class RegisterState extends RegisterStates {
       passwordVisible: passwordVisible ?? this.passwordVisible,
       rePasswordVisible: rePasswordVisible ?? this.rePasswordVisible,
       avatar: avatar ?? this.avatar,
-      // currentIndex: currentIndex ?? this.currentIndex,
+      currentIndex: currentIndex ?? this.currentIndex,
       selectedImage: selectedImage ?? this.selectedImage,
       profileImages: updatedProfileImages,
     );
