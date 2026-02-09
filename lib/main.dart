@@ -87,7 +87,7 @@ class MyApp extends StatelessWidget {
             },
 
           },
-          initialRoute: RegisterScreen.routeName,
+          initialRoute: initialRoute,
         );
       },
     );

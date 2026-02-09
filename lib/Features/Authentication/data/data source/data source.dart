@@ -15,7 +15,6 @@ class AuthDataSource{
     }
   }
 
-  @override
   Future<void> login({required String email, required String password}) async {
     try{
       final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
@@ -28,7 +27,6 @@ class AuthDataSource{
 
   }
 
-  @override
   Future<void> register({required UserModel user, required String password}) async {
     try {
       final credential = await FirebaseAuth.instance
