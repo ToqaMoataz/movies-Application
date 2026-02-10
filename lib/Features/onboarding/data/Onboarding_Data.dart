@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:movie_app/Core/assets/app_images.dart';
 
 
@@ -12,37 +13,33 @@ class OnBoardingData {
   });
   static List<OnBoardingData> onBoardingList = [
     OnBoardingData(
-      title: "Find Your Next \n Favorite Movie Here",
+      title: "onboarding_title_1".tr(),
       imagePath: AppImages.moviesPosters,
       subTitle:
-          "Get access to a huge library of movies \n to suit all tastes. You will surely like it.",
+      "onboarding_subtitle_1".tr(),
     ),
     OnBoardingData(
-      title: "Discover Movies",
+      title: "onboarding_title_2".tr(),
       imagePath: AppImages.onboardingImage2,
-      subTitle:
-          "Explore a vast collection of movies in all qualities and genres. Find your next favorite film with ease.",
+      subTitle:"onboarding_subtitle_2".tr(),
     ),
     OnBoardingData(
-      title: "Explore All Genres",
+      title: "onboarding_title_3".tr(),
       imagePath: AppImages.onboardingImage3,
-      subTitle:
-          "Discover movies from every genre, in all available qualities. Find something new and exciting to watch every day.",
+      subTitle:"onboarding_subtitle_3".tr(),
     ),
     OnBoardingData(
-      title: "Create Watchlists",
+      title: "onboarding_title_4".tr(),
       imagePath: AppImages.onboardingImage4,
-      subTitle:
-          "Save movies to your watchlist to keep track of what you want to watch next. Enjoy films in various qualities and genres.",
+      subTitle:"onboarding_subtitle_4".tr(),
     ),
     OnBoardingData(
-      title: "Rate, Review, and Learn",
+      title: "onboarding_title_5".tr(),
       imagePath: AppImages.onboardingImage5,
-      subTitle:
-          "Share your thoughts on the movies you've watched. Dive deep into film details and help others discover great movies with your reviews.",
+      subTitle: "onboarding_subtitle_5".tr(),
     ),
     OnBoardingData(
-      title: "Start Watching Now",
+      title: "onboarding_title_6".tr(),
       imagePath: AppImages.onboardingImage6,
     ),
   ];

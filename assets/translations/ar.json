@@ -5,8 +5,8 @@
   "mobile_number_text": "رقم الهاتف",
   "password_text": "كلمة المرور",
   "reset_password_text": "إعادة تعيين كلمة المرور",
+  "forget_password_text": "نسيت كلمة المرور",
   "re_password_text": "تأكيد كلمة المرور",
-  "forget_password_text": "نسيت كلمة المرور؟",
   "login_text": "تسجيل الدخول",
   "no_account_text": "لا تملك حساب؟",
   "already_have_account_text": "هل لديك حساب بالفعل؟",
@@ -14,14 +14,28 @@
   "or_text": "أو",
   "google_login_text": "تسجيل الدخول عبر جوجل",
   "register_heading": "التسجيل",
+
   "delete_account_text": "حذف الحساب",
+  "delete_account_confirm_text": "هل أنت متأكد أنك تريد حذف هذا الحساب؟",
   "update_data_text": "تحديث البيانات",
   "edit_profile_text": "تعديل الملف الشخصي",
-  "exit_text": "خروج",
+
+  "sign_out_text": "تسجيل الخروج",
+  "sign_out_confirm_text": "هل أنت متأكد أنك تريد تسجيل الخروج؟",
+  "sign_out_failed_text": "فشل تسجيل الخروج",
+  "no_user_signed_in_text": "لا يوجد مستخدم مسجل",
+
+  "home_text": "الرئيسية",
+  "search_text": "بحث",
+  "explore_text": "استكشاف",
+  "profile_text": "الملف الشخصي",
+
   "watch_list_text": "قائمة المشاهدة",
   "history_text": "التاريخ",
+
   "pick_avatar_heading": "اختر صورة الملف الشخصي",
   "new_avatar": "صورة جديدة",
+
   "see_more_text": "عرض المزيد",
   "watch_text": "مشاهدة",
   "summary_text": "ملخص",
@@ -29,5 +43,43 @@
   "cast_text": "الممثلون",
   "genres_text": "الأنواع",
   "discription_text": "الوصف",
-  "similar_text": "مشابه"
+  "similar_text": "مشابه",
+
+  "explore_now_text": "استكشف الآن",
+  "finish_text": "إنهاء",
+  "next_text": "التالي",
+
+  "something_went_wrong_text": "حدث خطأ ما",
+  "data_cannot_be_reached_text": "لا يمكن الوصول إلى البيانات",
+  "no_movies_found_text": "لم يتم العثور على أفلام",
+  "could_not_open_link_text": "تعذر فتح الرابط",
+
+  "verify_email_text": "تأكيد البريد الإلكتروني",
+
+  "name_required_text": "الاسم مطلوب",
+  "email_required_text": "البريد الإلكتروني مطلوب",
+  "email_not_valid_text": "البريد الإلكتروني غير صالح",
+  "password_required_text": "كلمة المرور مطلوبة",
+  "password_min_length_text": "الحد الأدنى 6 أحرف",
+  "confirm_password_text": "تأكيد كلمة المرور",
+  "passwords_mismatch_text": "كلمتا المرور غير متطابقتين",
+  "phone_required_text": "رقم الهاتف مطلوب",
+  "phone_min_length_text": "رقم الهاتف يجب ألا يقل عن 11 رقمًا",
+
+  "onboarding_title_1": "اعثر على فيلمك \n المفضل التالي هنا",
+  "onboarding_subtitle_1": "احصل على مكتبة ضخمة من الأفلام \n تناسب جميع الأذواق. ستعجبك بالتأكيد.",
+
+  "onboarding_title_2": "اكتشف الأفلام",
+  "onboarding_subtitle_2": "استكشف مجموعة واسعة من الأفلام بجميع الجودات والأنواع بسهولة.",
+
+  "onboarding_title_3": "استكشف جميع الأنواع",
+  "onboarding_subtitle_3": "اكتشف أفلامًا من كل الأنواع وبجميع الجودات المتاحة يوميًا.",
+
+  "onboarding_title_4": "أنشئ قوائم مشاهدة",
+  "onboarding_subtitle_4": "احفظ الأفلام في قائمة المشاهدة لمتابعة ما تريد مشاهدته لاحقًا.",
+
+  "onboarding_title_5": "قيّم وراجع وتعلم",
+  "onboarding_subtitle_5": "شارك رأيك في الأفلام التي شاهدتها وساعد الآخرين على اكتشاف أفلام رائعة.",
+
+  "onboarding_title_6": "ابدأ المشاهدة الآن"
 }

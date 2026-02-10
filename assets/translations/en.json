@@ -1,36 +1,85 @@
-
 {
-  "language_text" : "Language",
+  "language_text": "Language",
   "name_text": "Name",
   "email_text": "Email",
   "mobile_number_text": "Phone Number",
   "password_text": "Password",
   "reset_password_text": "Reset Password",
+  "forget_password_text": "Forget Password",
   "re_password_text": "Confirm Password",
-  "forget_password_text": "Forget Password ?",
   "login_text": "Login",
-  "no_account_text": "Don’t Have Account ? ",
-  "already_have_account_text": "Already Have Account ?",
-  "create_account_text": "Create One",
-  "or_text": "Or",
-  "google_login_text": "Login With Google",
+  "no_account_text": "Don’t have an account?",
+  "already_have_account_text": "Already have an account?",
+  "create_account_text": "Create Account",
+  "or_text": "OR",
+  "google_login_text": "Sign in with Google",
   "register_heading": "Register",
-  "delete_account_text" : "Delete Account",
-  "update_data_text" : "Update Data",
-  "edit_profile_text" : "Edit Profile",
-  "exit_text" : "Exit",
+
+  "delete_account_text": "Delete Account",
+  "delete_account_confirm_text": "Are you sure you want to delete this account?",
+  "update_data_text": "Update Data",
+  "edit_profile_text": "Edit Profile",
+
+  "sign_out_text": "Sign out",
+  "sign_out_confirm_text": "Are you sure you want to sign out?",
+  "sign_out_failed_text": "Sign out failed",
+  "no_user_signed_in_text": "No User Signed In",
+
+  "home_text": "Home",
+  "search_text": "Search",
+  "explore_text": "Explore",
+  "profile_text": "Profile",
+
   "watch_list_text": "Watch List",
-  "history_text" : "History",
-  "pick_avatar_heading" : "Pick Avatar",
-  "new_avatar" : "Avatar",
-  "see_more_text" : "See More",
+  "history_text": "History",
+
+  "pick_avatar_heading": "Pick Profile Avatar",
+  "new_avatar": "New Avatar",
+
+  "see_more_text": "See More",
   "watch_text": "Watch",
   "summary_text": "Summary",
-  "screenshots_text": "ScreenShots",
+  "screenshots_text": "Screenshots",
   "cast_text": "Cast",
-  "genres_text": "Geners",
+  "genres_text": "Genres",
   "discription_text": "Description",
-  "similar_text" : "Similar",
-  "search_text" : "Search"
+  "similar_text": "Similar",
 
+  "explore_now_text": "Explore Now",
+  "finish_text": "Finish",
+  "next_text": "Next",
+
+  "something_went_wrong_text": "Something Went Wrong",
+  "data_cannot_be_reached_text": "Data cannot be reached",
+  "no_movies_found_text": "No movies found",
+  "could_not_open_link_text": "Could not open link",
+
+  "verify_email_text": "Verify Email",
+
+  "name_required_text": "Name is required",
+  "email_required_text": "Email is required",
+  "email_not_valid_text": "Email is not valid",
+  "password_required_text": "Password is required",
+  "password_min_length_text": "Min 6 characters",
+  "confirm_password_text": "Confirm password",
+  "passwords_mismatch_text": "Passwords mismatch",
+  "phone_required_text": "Phone is required",
+  "phone_min_length_text": "Phone must be at least 11 digits",
+
+  "onboarding_title_1": "Find Your Next \n Favorite Movie Here",
+  "onboarding_subtitle_1": "Get access to a huge library of movies \n to suit all tastes. You will surely like it.",
+
+  "onboarding_title_2": "Discover Movies",
+  "onboarding_subtitle_2": "Explore a vast collection of movies in all qualities and genres. Find your next favorite film with ease.",
+
+  "onboarding_title_3": "Explore All Genres",
+  "onboarding_subtitle_3": "Discover movies from every genre, in all available qualities. Find something new and exciting to watch every day.",
+
+  "onboarding_title_4": "Create Watchlists",
+  "onboarding_subtitle_4": "Save movies to your watchlist to keep track of what you want to watch next. Enjoy films in various qualities and genres.",
+
+  "onboarding_title_5": "Rate, Review, and Learn",
+  "onboarding_subtitle_5": "Share your thoughts on the movies you've watched. Dive deep into film details and help others discover great movies with your reviews.",
+
+  "onboarding_title_6": "Start Watching Now"
 }

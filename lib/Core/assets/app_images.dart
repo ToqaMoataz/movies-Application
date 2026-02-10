@@ -9,6 +9,13 @@ abstract class AppImages {
   static const String watchNow = 'assets/images/Watch Now.png';
   static const String backgroundHomeTab = 'assets/images/background_hometab.png';
   static const String emptyList = "assets/images/empty.png";
+  static const String noImage ="assets/images/no image.png";
+  static const String playButtonImage ="assets/images/play button.png";
+  static const String forgotPassImage ="assets/images/Forgot password-bro 1.png";
+  static const String googleIcon ="assets/images/google_icon.png";
+  static const String movieAppIcon ="assets/images/movie_app_icon.png";
+  static const String lr ="assets/images/LR.png";
+  static const String eg ="assets/images/EG.png";
 
   static List<String> getUserImages(){
     return [

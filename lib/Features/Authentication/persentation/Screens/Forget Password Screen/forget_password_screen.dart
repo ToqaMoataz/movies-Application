@@ -1,7 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:movie_app/Core/assets/app_images.dart';
 import 'package:movie_app/Features/Authentication/data/Repository%20Implementation/repo_implemantation.dart';
 import 'package:movie_app/Features/Authentication/data/data%20source/data%20source.dart';
 import 'package:movie_app/Features/Authentication/domain/Use%20Cases/forgetPass_usecase.dart';
@@ -36,7 +38,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: Text("Forget Password"),
+        title: Text("forget_password_text".tr()),
         leading: IconButton(icon:Icon(Icons.arrow_back),onPressed: (){
           Navigator.pop(context);
         },),
@@ -47,7 +49,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
           spacing: 24.h,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Image(image: AssetImage("assets/images/Forgot password-bro 1.png")),
+            Image(image: AssetImage(AppImages.forgotPassImage)),
             Container(
               height: 56.h,
               padding: EdgeInsets.symmetric(horizontal: 20),
@@ -68,7 +70,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                       ),
                       controller: _emailController,
                       decoration: InputDecoration(
-                        hintText: "Email",
+                        hintText: "email_text".tr(),
                         border: InputBorder.none,
                         hintStyle: GoogleFonts.roboto(
                           fontWeight: FontWeight.w400,
@@ -99,7 +101,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
 
                   if (state.forgetPassRequestState == RequestState.error) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text(state.errorMessage ?? "Error occurred")),
+                      SnackBar(content: Text(state.errorMessage ?? "something_went_wrong_text".tr())),
                     );
                   }
                 },
@@ -116,7 +118,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                         borderRadius: BorderRadius.circular(15.r),
                       ),
                       child: Text(
-                        "Verify Email",
+                        "verify_email_text".tr(),
                         style: GoogleFonts.roboto(
                           fontSize: 20.sp,
                           color: AppColors.getSecondaryTextColor(),

@@ -6,7 +6,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_app/Core/Theme/app_colors.dart';
 import 'package:movie_app/Core/assets/app_images.dart';
 import '../../../../../../../Core/assets/App Components/movie_card.dart';
-import '../../../../../moviesDetails/persentation/movie_details_screen.dart';
 import '../../../HomeScreen cubit/cubit.dart';
 import '../../../HomeScreen cubit/state.dart';
 
@@ -109,7 +108,7 @@ class _SearchTabState extends State<SearchTab> {
                 if (movies == null || movies.isEmpty) {
                   return Center(
                     child: Text(
-                      "No movies found",
+                      "no_movies_found_text".tr(),
                       style: GoogleFonts.roboto(
                         fontSize: 24.sp,
                         color: AppColors.getAccentColor(),
@@ -139,7 +138,7 @@ class _SearchTabState extends State<SearchTab> {
               else if (cubit.state.searchMoviesRequestState==RequestState.error) {
                 return Center(
                   child: Text(
-                    "Something went wrong",
+                    "something_went_wrong_text".tr(),
                     style: GoogleFonts.roboto(
                       fontSize: 20.sp,
                       fontWeight: FontWeight.bold,

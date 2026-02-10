@@ -1,10 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_app/Core/Theme/app_colors.dart';
 import '../../../../../../../Core/assets/App Components/movie_card.dart';
-import '../../../../../moviesDetails/persentation/movie_details_screen.dart';
 import '../../../../data/Data Source/local_data.dart';
 import '../../../HomeScreen cubit/cubit.dart';
 import '../../../HomeScreen cubit/state.dart';
@@ -77,7 +77,7 @@ class BrowseTab extends StatelessWidget {
                 if (movies == null || movies.isEmpty) {
                   return Center(
                     child: Text(
-                      "No movies found",
+                      "no_movies_found_text".tr(),
                       style: GoogleFonts.roboto(
                         fontSize: 24.sp,
                         color: AppColors.getAccentColor(),
@@ -106,7 +106,7 @@ class BrowseTab extends StatelessWidget {
               else if (cubit.state.browseMoviesRequestState==RequestState.error) {
                 return Center(
                   child: Text(
-                    "Something went wrong",
+                    "something_went_wrong_text".tr(),
                     style: GoogleFonts.roboto(
                       fontSize: 20.sp,
                       fontWeight: FontWeight.bold,

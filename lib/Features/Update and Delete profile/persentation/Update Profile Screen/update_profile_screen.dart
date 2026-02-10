@@ -4,14 +4,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_app/Core/Models/user_model.dart';
-import 'package:movie_app/Features/HomeScreen/persentation/HomeScreen%20cubit/cubit.dart';
 import 'package:movie_app/Features/Update%20and%20Delete%20profile/persentation/components/dialog_to_show.dart';
 import 'package:movie_app/Features/Update%20and%20Delete%20profile/persentation/update%20and%20delete%20cubit/cubit.dart';
 import 'package:movie_app/Features/Update%20and%20Delete%20profile/persentation/update%20and%20delete%20cubit/states.dart';
 import '../../../../Core/Theme/app_colors.dart';
 import '../../../Authentication/persentation/Screens/Forget Password Screen/forget_password_screen.dart';
 import '../../../Authentication/persentation/Screens/Login Screen/login_screen.dart';
-import '../../../HomeScreen/persentation/Home Screen/home_Screen.dart';
+import '../../../HomeScreen/persentation/Home Screen/Screen/home_Screen.dart';
 
 class UpdateProfileScreen extends StatefulWidget {
   static const String routeName = "updateProfile";
@@ -60,12 +59,12 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
             RequestState.error) {
           ScaffoldMessenger.of(
             context,
-          ).showSnackBar(SnackBar(content: Text("Error deleting account")));
+          ).showSnackBar(SnackBar(content: Text("error_deleting_account_text".tr())));
         }
         if (UpdateProfileCubit.get(context).state.updateProfileRequestState == RequestState.error) {
           ScaffoldMessenger.of(
             context,
-          ).showSnackBar(SnackBar(content: Text("Error updating account")));
+          ).showSnackBar(SnackBar(content: Text("error_updating_account_text".tr())));
         }
         if (UpdateProfileCubit.get(context).state.updateProfileRequestState == RequestState.success) {
           Navigator.pushReplacementNamed(context, HomeScreen.routeName);
@@ -156,7 +155,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                                 ],
                               ),
                             ),
-                            const SizedBox(height: 20),
+                            SizedBox(height: 20.h),
                             // Phone TextField inlined
                             Container(
                               height: 56.h,
@@ -198,10 +197,10 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                                       validator: (value) {
                                         if (value == null ||
                                             value.trim().isEmpty) {
-                                          return "Phone is required";
+                                          return "phone_required_text".tr();
                                         }
                                         if (value.length < 11) {
-                                          return "Phone must be at least 11 digits";
+                                          return "phone_min_length_text".tr();
                                         }
                                         return null;
                                       },
@@ -210,7 +209,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                                 ],
                               ),
                             ),
-                            const SizedBox(height: 26),
+                            SizedBox(height: 26.h),
                             GestureDetector(
                               onTap: () {
                                 Navigator.pushNamed(
@@ -255,7 +254,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                                     ),
                                   ),
                                 ),
-                                const SizedBox(height: 20),
+                                SizedBox(height: 20.h),
                                 // Update Button inlined
                                 InkWell(
                                   onTap: () => cubit.updateUser(
@@ -320,7 +319,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
           side: BorderSide(color: AppColors.getAccentColor(), width: 2),
         ),
         title: Text(
-          "Delete Account",
+          "delete_account_text".tr(),
           style: GoogleFonts.roboto(
             fontWeight: FontWeight.w400,
             fontSize: 16.sp,
@@ -328,7 +327,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
           ),
         ),
         content: Text(
-          "Are you sure you want to delete this account?",
+          "delete_account_confirm_text".tr(),
           style: GoogleFonts.roboto(
             fontWeight: FontWeight.w400,
             fontSize: 16.sp,
@@ -339,7 +338,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
             child: Text(
-              "Cancel",
+              "cancel_text".tr(),
               style: GoogleFonts.roboto(
                 fontWeight: FontWeight.w400,
                 fontSize: 14.sp,
@@ -354,7 +353,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
               cubit.deleteUser();
             },
             child: Text(
-              "Delete",
+              "delete_text".tr(),
               style: GoogleFonts.roboto(
                 fontWeight: FontWeight.w400,
                 fontSize: 16.sp,

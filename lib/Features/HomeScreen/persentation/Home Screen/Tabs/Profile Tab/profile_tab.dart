@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_app/Core/Theme/app_colors.dart';
 import 'package:movie_app/Core/assets/App%20Components/movie_card.dart';
+import 'package:movie_app/Core/assets/app_images.dart';
 import '../../../../../Authentication/persentation/Screens/Login Screen/login_screen.dart';
 import '../../../../../Update and Delete profile/persentation/Update Profile Screen/update_profile_screen.dart';
 import '../../../HomeScreen cubit/cubit.dart';
@@ -50,7 +51,7 @@ class _ProfileScreenState extends State<ProfileTab>
                 RequestState.error) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
-                  content: Text("Sign out failed"),
+                  content: Text("sign_out_failed_text".tr()),
                   backgroundColor: Colors.red,
                 ),
               );
@@ -76,7 +77,7 @@ class _ProfileScreenState extends State<ProfileTab>
                 if (user == null) {
                   return Center(
                     child: Text(
-                      "No User Signed In",
+                      "no_user_signed_in_text".tr(),
                       style: GoogleFonts.roboto(
                         fontSize: 24.sp,
                         color: AppColors.getAccentColor(),
@@ -353,7 +354,7 @@ class _ProfileScreenState extends State<ProfileTab>
                                         ? Center(
                                             child: Image(
                                               image: AssetImage(
-                                                "assets/images/empty.png",
+                                                AppImages.emptyList,
                                               ),
                                             ),
                                           )
@@ -449,7 +450,7 @@ class _ProfileScreenState extends State<ProfileTab>
                   RequestState.error) {
                 return Center(
                   child: Text(
-                    "Something went wrong",
+                    "something_went_wrong_text".tr(),
                     style: GoogleFonts.roboto(
                       fontSize: 20.sp,
                       fontWeight: FontWeight.bold,
@@ -477,7 +478,7 @@ class _ProfileScreenState extends State<ProfileTab>
           side: BorderSide(color: AppColors.getAccentColor(), width: 2),
         ),
         title: Text(
-          "Sign out",
+          "sign_out_text".tr(),
           style: GoogleFonts.roboto(
             fontWeight: FontWeight.w400,
             fontSize: 16.sp,
@@ -485,7 +486,7 @@ class _ProfileScreenState extends State<ProfileTab>
           ),
         ),
         content: Text(
-          "Are you sure you want to sign out?",
+          "sign_out_confirm_text".tr(),
           style: GoogleFonts.roboto(
             fontWeight: FontWeight.w400,
             fontSize: 16.sp,
@@ -496,7 +497,7 @@ class _ProfileScreenState extends State<ProfileTab>
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
             child: Text(
-              "Cancel",
+              "cancel_text".tr(),
               style: GoogleFonts.roboto(
                 fontWeight: FontWeight.w400,
                 fontSize: 14.sp,
@@ -511,7 +512,7 @@ class _ProfileScreenState extends State<ProfileTab>
               await cubit.signOut();
             },
             child: Text(
-              "Sign out",
+              "sign_out_text".tr(),
               style: GoogleFonts.roboto(
                 fontWeight: FontWeight.w400,
                 fontSize: 16.sp,

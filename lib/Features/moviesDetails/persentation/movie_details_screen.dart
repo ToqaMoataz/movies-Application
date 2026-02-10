@@ -8,18 +8,16 @@ import 'package:movie_app/Core/Theme/app_colors.dart';
 import 'package:movie_app/Features/moviesDetails/data/Data%20Sources/dataSource.dart';
 import 'package:movie_app/Features/moviesDetails/data/Repo%20Imlementation/movie_details_repo_Imp.dart';
 import 'package:movie_app/Features/moviesDetails/domain/Use%20Cases/moviesDetails_usecases.dart';
-import '../domain/Movies Details Repo/movie_details_repo.dart';
+import '../../../Core/assets/app_images.dart';
 import 'Components/cast_component.dart';
 import 'Components/movie_suggestions_component.dart';
 import 'Components/small_info_card.dart';
 import 'MovieDetailsScreen cubit/cubit.dart';
 import 'MovieDetailsScreen cubit/states.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 
 class MovieDetailsScreen extends StatelessWidget {
-  static const String routeName=""
-      "movieDetailsScreen";
+  static const String routeName= "movieDetailsScreen";
   const MovieDetailsScreen({super.key});
   @override
   Widget build(BuildContext context) {
@@ -27,7 +25,7 @@ class MovieDetailsScreen extends StatelessWidget {
     return Scaffold(
       body: BlocProvider<MovieDetailsCubit>(
         create: (context)=>MovieDetailsCubit(MovieDetailsUseCases(MovieDetailsRepoImp(MoviesDetailsImpDs())))..getMovieById(movieId),
-        child: BlocConsumer<MovieDetailsCubit,MovieDetailsStates>(
+        child: BlocBuilder<MovieDetailsCubit,MovieDetailsStates>(
             builder: (context,state){
               MovieDetailsCubit.get(context).addToList('history',movieId,true);
               var movie=MovieDetailsCubit.get(context).state.movieResponse?.data.movie;
@@ -56,13 +54,13 @@ class MovieDetailsScreen extends StatelessWidget {
                                       fit: BoxFit.cover,
                                       errorBuilder: (context, error, stackTrace) {
                                         return Image.asset(
-                                          "assets/images/no image.png",
+                                          AppImages.noImage,
                                           fit: BoxFit.cover,
                                         );
                                       },
                                     )
                                         : Image.asset(
-                                      "assets/images/no image.png",
+                                      AppImages.noImage,
                                       fit: BoxFit.cover,
                                     ),
                                   )
@@ -100,16 +98,11 @@ class MovieDetailsScreen extends StatelessWidget {
                                       ),
                                     ),
                                     Center(
-                                      child: IconButton(
-                                        onPressed: () {
-
-                                        },
-                                        icon: Image.asset(
-                                          "assets/images/play button.png",
+                                      child: Image.asset(
+                                          AppImages.playButtonImage,
                                           width: 70,
                                           height: 70,
                                         ),
-                                      ),
 
                                     ),
                                     Padding(
@@ -118,7 +111,7 @@ class MovieDetailsScreen extends StatelessWidget {
                                         crossAxisAlignment: CrossAxisAlignment.stretch,
                                         children: [
                                           Text(
-                                            movie?.title??"Movie Title",
+                                            movie!.title,
                                             textAlign: TextAlign.center,
                                             style: GoogleFonts.roboto(
                                               color: AppColors.getPrimaryTextColor(),
@@ -129,7 +122,7 @@ class MovieDetailsScreen extends StatelessWidget {
                                             ),
                                           ),
                                           Text(
-                                            "${movie?.year}",
+                                            "${movie.year}",
                                             textAlign: TextAlign.center,
                                             style: GoogleFonts.roboto(
                                               color: Color(0XFFADADAD),
@@ -158,7 +151,7 @@ class MovieDetailsScreen extends StatelessWidget {
                                 ElevatedButton(
                                   onPressed: () async {
                                     try {
-                                      await MovieDetailsCubit.get(context).goToWatchMovie(movie!.url);
+                                      await MovieDetailsCubit.get(context).goToWatchMovie(movie.url);
                                     } catch (e) {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                           SnackBar(content: Text("Could not open link"))
@@ -188,7 +181,7 @@ class MovieDetailsScreen extends StatelessWidget {
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                                     children: [
-                                      SmallInfoCard(icon: Icons.favorite, info: movie!.likeCount.toString()),
+                                      SmallInfoCard(icon: Icons.favorite, info: movie.likeCount.toString()),
                                       SmallInfoCard(icon: Icons.watch_later_rounded, info: movie.runtime.toString()),
                                       SmallInfoCard(icon: Icons.star, info: movie.rating.toString())
                                     ],
@@ -211,7 +204,7 @@ class MovieDetailsScreen extends StatelessWidget {
                                             movie.largeScreenshot1,
                                             errorBuilder: (context, error, stackTrace) {
                                               return Image.asset(
-                                                "assets/images/no image.png",
+                                                AppImages.noImage,
                                                 fit: BoxFit.cover,
                                               );
                                             },
@@ -223,7 +216,7 @@ class MovieDetailsScreen extends StatelessWidget {
                                             movie.largeScreenshot2,
                                             errorBuilder: (context, error, stackTrace) {
                                               return Image.asset(
-                                                "assets/images/no image.png",
+                                                AppImages.noImage,
                                                 fit: BoxFit.cover,
                                               );
                                             },
@@ -235,7 +228,7 @@ class MovieDetailsScreen extends StatelessWidget {
                                             movie.largeScreenshot3,
                                             errorBuilder: (context, error, stackTrace) {
                                               return Image.asset(
-                                                "assets/images/no image.png",
+                                                AppImages.noImage,
                                                 fit: BoxFit.cover,
                                               );
                                             },
@@ -305,7 +298,7 @@ class MovieDetailsScreen extends StatelessWidget {
                                     crossAxisSpacing: 8,
                                     childAspectRatio: 2.5,
                                   ),
-                                  itemCount: movie.genres.length ?? 0,
+                                  itemCount: movie.genres.length,
                                   itemBuilder: (context, index) {
                                     return Container(
                                       alignment: Alignment.center,
@@ -334,14 +327,13 @@ class MovieDetailsScreen extends StatelessWidget {
                   ],
                 );
               }
-              return Center(child: Text("Something Went Wrong",style:GoogleFonts.roboto(
+              return Center(child: Text("something_went_wrong_text".tr(),style:GoogleFonts.roboto(
                   fontSize: 30.sp,
                   fontWeight: FontWeight.w700,
                   color: AppColors.getAccentColor()
               ),),);
             },
-
-            listener: (context,state){})
+        )
       ),
     );
   }

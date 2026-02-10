@@ -1,17 +1,17 @@
 import 'dart:ui' as ui;
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:movie_app/Core/assets/app_images.dart';
 import 'package:movie_app/Features/Authentication/data/Repository%20Implementation/repo_implemantation.dart';
 import 'package:movie_app/Features/Authentication/data/data%20source/data%20source.dart';
 import 'package:movie_app/Features/Authentication/domain/Use%20Cases/register_usecase.dart';
 import 'package:movie_app/Features/Authentication/persentation/Screens/Regiser%20Screen/Register%20Cubit/cubit.dart';
 import 'package:movie_app/Features/Authentication/persentation/Screens/Regiser%20Screen/Register%20Cubit/states.dart';
-import 'package:movie_app/Features/HomeScreen/persentation/Home%20Screen/home_Screen.dart';
+import 'package:movie_app/Features/HomeScreen/persentation/Home%20Screen/Screen/home_Screen.dart';
 import '../../../../../Core/Models/user_model.dart';
 import '../../../../../Core/Theme/app_colors.dart';
 import '../Login Screen/login_screen.dart';
@@ -71,7 +71,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 } else if (state.registerRequestState == RequestState.error) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      content: Text(state.errorMessage ?? "Error"),
+                      content: Text(state.errorMessage ?? "something_went_wrong_text".tr()),
                       backgroundColor: Colors.red,
                     ),
                   );
@@ -135,7 +135,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                     ),
 
-                    // --- Form Section ---
+                    // Form
                     Form(
                       key: _formKey,
                       child: Padding(
@@ -149,7 +149,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               hint: "name_text".tr(),
                               icon: Icons.perm_identity,
                               onChanged: (val) => RegisterCubit.get(context).editUserName(val),
-                              validator: (value) => (value == null || value.trim().isEmpty) ? "Name is required" : null,
+                              validator: (value) => (value == null || value.trim().isEmpty) ? "name_required_text".tr() : null,
                             ),
                             SizedBox(height: 20.h),
 
@@ -160,8 +160,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               icon: Icons.mail_rounded,
                               validator: (value) {
                                 final RegExp emailRegex = RegExp(r'^[\w\.-]+@[\w\.-]+\.(com)$');
-                                if (value == null || value.isEmpty) return "Email is required";
-                                if (!emailRegex.hasMatch(value)) return "Email is not valid";
+                                if (value == null || value.isEmpty) return "email_required_text".tr();
+                                if (!emailRegex.hasMatch(value)) return "email_not_valid_text".tr();
                                 return null;
                               },
                             ),
@@ -176,8 +176,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               isVisible: state.passwordVisible,
                               onVisibilityToggle: () => RegisterCubit.get(context).toggleVisibility(),
                               validator: (value) {
-                                if (value == null || value.isEmpty) return "Password is required";
-                                if (value.length < 6) return "Min 6 characters";
+                                if (value == null || value.isEmpty) return "password_required_text".tr();
+                                if (value.length < 6) return "password_min_length_text".tr();
                                 return null;
                               },
                             ),
@@ -192,8 +192,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               isVisible: state.rePasswordVisible,
                               onVisibilityToggle: () => RegisterCubit.get(context).toggleReVisibility(),
                               validator: (value) {
-                                if (value == null || value.isEmpty) return "Confirm password";
-                                if (value != _passwordController.text) return "Passwords mismatch";
+                                if (value == null || value.isEmpty) return "confirm_password_text".tr();
+                                if (value != _passwordController.text) return "passwords_mismatch_text".tr();
                                 return null;
                               },
                             ),
@@ -202,13 +202,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             // Phone TextField
                             _buildInputField(
                               controller: _phoneController,
-                              hint: "Phone Number",
+                              hint: "mobile_number_text".tr(),
                               icon: Icons.phone_android_rounded,
                               keyboardType: TextInputType.phone,
                               validator: (value) {
                                 final RegExp phoneRegex = RegExp(r'^[0-9]{10,15}$');
-                                if (value == null || value.trim().isEmpty) return "Phone required";
-                                if (!phoneRegex.hasMatch(value.trim())) return "Invalid phone";
+                                if (value == null || value.trim().isEmpty) return "phone_required_text".tr();
+                                if (!phoneRegex.hasMatch(value.trim())) return "phone_min_length_text".tr();
                                 return null;
                               },
                             ),
@@ -282,7 +282,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
-  // Helper Widget to keep code clean and avoid overflows
   Widget _buildInputField({
     required TextEditingController controller,
     required String hint,
@@ -316,8 +315,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
               decoration: InputDecoration(
                 hintText: hint,
                 border: InputBorder.none,
-                hintStyle: GoogleFonts.roboto(color: AppColors.getPrimaryTextColor().withOpacity(0.6)),
-                errorStyle: const TextStyle(height: 0.8), // Keeps error text compact
+                hintStyle: GoogleFonts.roboto(color: AppColors.getPrimaryTextColor()),
+                errorStyle:TextStyle(height: 0.8),
               ),
             ),
           ),
@@ -339,8 +338,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
       child: Directionality(
         textDirection: ui.TextDirection.ltr,
         child: Container(
-          width: 85,
-          height: 38,
+          width: 85.w,
+          height: 38.h,
           padding: const EdgeInsets.symmetric(horizontal: 4),
           decoration: BoxDecoration(
             border: Border.all(width: 2, color: AppColors.getAccentColor()),
@@ -349,8 +348,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _langToggle(context, 'en', "assets/images/LR.png"),
-              _langToggle(context, 'ar', "assets/images/EG.png"),
+              _langToggle(context, 'en', AppImages.lr),
+              _langToggle(context, 'ar', AppImages.eg),
             ],
           ),
         ),
@@ -361,7 +360,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget _langToggle(BuildContext context, String langCode, String asset) {
     bool isActive = context.locale.toString() == langCode;
     return InkWell(
-      onTap: () => setState(() => context.setLocale(Locale(langCode))),
+      onTap: () => context.setLocale(Locale(langCode)),
       child: Container(
         decoration: BoxDecoration(
           shape: BoxShape.circle,

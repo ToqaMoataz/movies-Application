@@ -7,9 +7,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_app/Core/Theme/app_colors.dart';
+import 'package:movie_app/Core/assets/app_images.dart';
 import 'package:movie_app/Features/Authentication/domain/Use%20Cases/login_usecase.dart';
 import 'package:movie_app/Features/Authentication/persentation/Screens/Login%20Screen/Login%20Cubit/cubit.dart';
-import 'package:movie_app/Features/HomeScreen/persentation/Home%20Screen/home_Screen.dart';
+import 'package:movie_app/Features/HomeScreen/persentation/Home%20Screen/Screen/home_Screen.dart';
 import '../../../data/Repository Implementation/repo_implemantation.dart';
 import '../../../data/data source/data source.dart';
 import '../Forget Password Screen/forget_password_screen.dart';
@@ -60,7 +61,7 @@ class _LoginScreenState extends State<LoginScreen>{
                     Padding(
                       padding: const EdgeInsets.only(top: 40),
                       child: Image(
-                        image: AssetImage("assets/images/movie_app_icon.png"),
+                        image: AssetImage(AppImages.movieAppIcon),
                         height: 118.h,
                         width: 121.w,
                       ),
@@ -102,7 +103,7 @@ class _LoginScreenState extends State<LoginScreen>{
                                     ),
                                     validator: (value) {
                                       if (value == null || value.isEmpty) {
-                                        return "Email can't be empty";
+                                        return "email_required_text".tr();
                                       }
                                       return null;
                                     },
@@ -146,7 +147,7 @@ class _LoginScreenState extends State<LoginScreen>{
                                     ),
                                     validator: (value) {
                                       if (value == null || value.isEmpty) {
-                                        return "Password can't be empty";
+                                        return "password_required_text";
                                       }
                                       return null;
                                     },
@@ -268,9 +269,9 @@ class _LoginScreenState extends State<LoginScreen>{
                             fontSize: 16.sp,
                           ),
                         ),
-                        const Expanded(
+                        Expanded(
                           child: Divider(
-                            color: Color(0XFFF6BD00),
+                            color: AppColors.getAccentColor(),
                             thickness: 1,
                             indent: 10,
                             endIndent: 20,
@@ -294,7 +295,7 @@ class _LoginScreenState extends State<LoginScreen>{
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Image(
-                              image: AssetImage("assets/images/google_icon.png"),
+                              image: AssetImage(AppImages.googleIcon),
                               height: 24,
                               width: 24,
                             ),
@@ -333,9 +334,8 @@ class _LoginScreenState extends State<LoginScreen>{
                               InkWell(
                                 onTap: () {
                                   context.setLocale(Locale('en'));
-                                  setState(() {});
                                 },
-                                borderRadius: BorderRadius.circular(100),
+                                borderRadius: BorderRadius.circular(100.r),
                                 child: Container(
                                   width: 22,
                                   height: 22,
@@ -349,7 +349,7 @@ class _LoginScreenState extends State<LoginScreen>{
                                   ),
                                   child: ClipOval(
                                     child: Image.asset(
-                                      "assets/images/LR.png",
+                                      AppImages.lr,
                                       fit: BoxFit.cover,
                                     ),
                                   ),
@@ -358,7 +358,6 @@ class _LoginScreenState extends State<LoginScreen>{
                               InkWell(
                                 onTap: () {
                                   context.setLocale(Locale('ar'));
-                                  setState(() {});
                                 },
                                 borderRadius: BorderRadius.circular(100),
                                 child: Container(
@@ -372,7 +371,7 @@ class _LoginScreenState extends State<LoginScreen>{
                                   ),
                                   child: ClipOval(
                                     child: Image.asset(
-                                      "assets/images/EG.png",
+                                      AppImages.eg,
                                       fit: BoxFit.cover,
                                       width: 22,
                                       height: 22,
@@ -398,7 +397,7 @@ class _LoginScreenState extends State<LoginScreen>{
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text(
-                    state.errorMessage ?? "Something went wrong",
+                    state.errorMessage ?? "something_went_wrong_text".tr(),
                     style: TextStyle(color: AppColors.getAccentColor()),
                   ),
                   backgroundColor: Colors.black,

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/Features/HomeScreen/data/Data%20Source/movies_data_sources_impl.dart';
@@ -6,15 +7,15 @@ import 'package:movie_app/Features/HomeScreen/data/Repo%20Implementation/user_re
 import 'package:movie_app/Features/HomeScreen/domain/Usecases/Movies%20Use%20Cases/movies_base_usecase.dart';
 import 'package:movie_app/Features/HomeScreen/domain/Usecases/User%20Use%20Cases/user_base_usecase.dart';
 
-import '../../../../Core/Theme/app_colors.dart';
-import '../../data/Repo Implementation/movie_remote_repo_imp.dart';
+import '../../../../../Core/Theme/app_colors.dart';
+import '../../../data/Repo Implementation/movie_remote_repo_imp.dart';
 
-import '../HomeScreen cubit/cubit.dart';
-import '../HomeScreen cubit/state.dart';
-import 'Tabs/Browse Tab/browse_tab.dart';
-import 'Tabs/Home Tab/home_tab.dart';
-import 'Tabs/Profile Tab/profile_tab.dart';
-import 'Tabs/Search Tab/search_tab.dart';
+import '../../HomeScreen cubit/cubit.dart';
+import '../../HomeScreen cubit/state.dart';
+import '../Tabs/Browse Tab/browse_tab.dart';
+import '../Tabs/Home Tab/home_tab.dart';
+import '../Tabs/Profile Tab/profile_tab.dart';
+import '../Tabs/Search Tab/search_tab.dart';
 
 class HomeScreen extends StatelessWidget {
   static const String routeName="homeScreen";
@@ -48,11 +49,11 @@ class HomeScreen extends StatelessWidget {
                       onTap: (value) {
                         HomeCubit.get(context).setTabIndex(value);
                       },
-                      items: const [
-                        BottomNavigationBarItem(icon: Icon(Icons.home_filled), label: 'Home'),
-                        BottomNavigationBarItem(icon: Icon(Icons.search_rounded), label: 'Search'),
-                        BottomNavigationBarItem(icon: Icon(Icons.explore), label: 'Explore'),
-                        BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+                      items: [
+                        BottomNavigationBarItem(icon:  Icon(Icons.home_filled), label: "home_text".tr()),
+                         BottomNavigationBarItem(icon: Icon(Icons.search_rounded), label: "search_text".tr()),
+                         BottomNavigationBarItem(icon: Icon(Icons.explore), label: "explore_text".tr()),
+                         BottomNavigationBarItem(icon: Icon(Icons.person), label: "profile_text".tr()),
                       ],
                     ),
                   ),

@@ -1,4 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -45,7 +46,7 @@ class _HomeTabState extends State<HomeTab> {
         else if (state.recentMoviesRequestState == RequestState.error ||
             state.moviesByGenreRequestState == RequestState.error) {
           return Center(
-              child: Text("Data cannot be reached",style: GoogleFonts.inter(
+              child: Text("data_cannot_be_reached_text".tr(),style: GoogleFonts.inter(
                   fontSize: 16.sp,
                   color: AppColors.getAccentColor(),
                   fontWeight: FontWeight.w700

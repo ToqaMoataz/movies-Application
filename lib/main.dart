@@ -13,7 +13,7 @@ import 'Core/Hive/hive_manager.dart';
 import 'Features/Authentication/persentation/Screens/Forget Password Screen/forget_password_screen.dart';
 import 'Features/Authentication/persentation/Screens/Login Screen/login_screen.dart';
 import 'Features/Authentication/persentation/Screens/Regiser Screen/register_screen.dart';
-import 'Features/HomeScreen/persentation/Home Screen/home_Screen.dart';
+import 'Features/HomeScreen/persentation/Home Screen/Screen/home_Screen.dart';
 import 'Features/Update and Delete profile/data/Edit Profile repo Imp/update_profile_repo_imp.dart';
 import 'Features/Update and Delete profile/persentation/Update Profile Screen/update_profile_screen.dart';
 import 'Features/Update and Delete profile/persentation/update and delete cubit/cubit.dart';
