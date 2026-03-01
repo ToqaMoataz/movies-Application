@@ -8,16 +8,17 @@ import '../../../../Core/Models/movie_model.dart';
 import '../../../moviesDetails/data/Repo Imlementation/movie_details_repo_Imp.dart';
 import '../../../moviesDetails/domain/Movies Details Repo/movie_details_repo.dart';
 
-class MoviesDataSourcesImpl extends MoviesDataSources{
+class MoviesTmdbDataSourcesImpl extends MoviesDataSources{
   ApiManager api=ApiManager();
   MovieDetailsRepo repo=MovieDetailsRepoImp(MoviesDetailsImpDs());
 
+  MoviesTmdbDataSourcesImpl(this.repo);
   /////////// List_Movies
-  //search_movies ✅
+
   @override
   Future<MoviesResponse> searchMovies(String movieName) async {
     try {
-      var response = await api.getApi(Endpoints.listMoviesEndpoint, params: {
+      var response = await api.getApi(YTSEndpoints.listMoviesEndpoint, params: {
         "query_term": movieName
       });
       MoviesResponse result = MoviesResponse.fromJson(response.data);
@@ -32,7 +33,7 @@ class MoviesDataSourcesImpl extends MoviesDataSources{
   Future<MoviesResponse> listMoviesByGenre(String genre) async {
     try {
       var response = await api.getApi(
-        Endpoints.listMoviesEndpoint,
+        YTSEndpoints.listMoviesEndpoint,
         params: {
           "genre": genre,
         },
@@ -48,7 +49,7 @@ class MoviesDataSourcesImpl extends MoviesDataSources{
   Future<MoviesResponse> listLimitMoviesByGenre(String genre,int limit) async {
     try {
       var response = await api.getApi(
-        Endpoints.listMoviesEndpoint,
+        YTSEndpoints.listMoviesEndpoint,
         params: {
           "genre": genre,
           "limit": limit,
@@ -66,7 +67,7 @@ class MoviesDataSourcesImpl extends MoviesDataSources{
   @override
   Future<MoviesResponse> getRecentMovies() async {
     try {
-      var response = await api.getApi(Endpoints.listMoviesEndpoint, params: {
+      var response = await api.getApi(YTSEndpoints.listMoviesEndpoint, params: {
         "sort_by": "year",
         "order_by": "desc",
         "limit": 10,
@@ -82,9 +83,15 @@ class MoviesDataSourcesImpl extends MoviesDataSources{
 
   /////////// Movie_Details
   //list_of_movies
+  @override
   Future<List<MovieResponse>> getMoviesByIDs(List<int> ids) async {
     try {
-
+      // var response = await api.getApi(
+      //   YTSEndpoints.movieDetailsEndpoint,
+      //   params: {"movie_id": id, "with_images": true, "with_cast": true},
+      // );
+      // MovieResponse result = MovieResponse.fromJson(response.data);
+      // return result;
       final responses = await Future.wait(
         ids.map((id) => repo.getMovieByID(id)),
       );
@@ -95,9 +102,10 @@ class MoviesDataSourcesImpl extends MoviesDataSources{
     }
   }
 
+  @override
   Future<MoviesResponse> getMovieSuggestionsById(int id) async {
     try {
-      var response = await api.getApi(Endpoints.movieSuggestionsEndpoint,
+      var response = await api.getApi(YTSEndpoints.movieSuggestionsEndpoint,
           params: {
             "movie_id": id
           }

@@ -5,7 +5,7 @@ class ApiManager{
   late Dio dio;
 
   ApiManager(){
-    dio=Dio(BaseOptions(baseUrl: Constants.baseUrl));
+    dio=Dio(BaseOptions(baseUrl: Constants.ytsBaseUrl));
   }
 
   Future<Response>getApi(String endPoint,{Map<String,dynamic>? params}){
