@@ -1,13 +1,11 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../Core/Hive/hive_manager.dart';
+import 'package:injectable/injectable.dart';
+import 'package:movie_app/Core/Entities/movie_entity.dart';
 import '../../domain/Use Cases/moviesDetails_usecases.dart';
 import 'states.dart';
-import '../../../../Core/Models/movie_model.dart';
-import '../../domain/Movies Details Repo/movie_details_repo.dart';
-import '../../../../../../Core/Models/MoviesResponse.dart';
 
+@injectable
 class MovieDetailsCubit extends Cubit<MovieDetailsStates> {
-  // final MovieDetailsRepo repo;
   final MovieDetailsUseCases useCases;
   MovieDetailsCubit(this.useCases) : super(MovieDetailsStates());
 
@@ -18,31 +16,35 @@ class MovieDetailsCubit extends Cubit<MovieDetailsStates> {
   }
 
   Future<void> getMovieById(int id) async {
+    print("ID: $id");
     emit(state.copyWith(movieRequestState: RequestState.loading));
     try {
-      final MovieResponse result = await useCases.getMovieByIDUC.call(id);
+      final MovieEntity result = await useCases.getMovieByIDUC.call(id);
       emit(state.copyWith(
         movieResponse: result,
         movieRequestState: RequestState.success,
       ));
-      await getMovieSuggestionsById(id);
     } catch (e) {
+      print("Error message: ${e.toString()}");
       emit(state.copyWith(movieRequestState: RequestState.error));
     }
   }
 
-  Future<void> getMovieSuggestionsById(int id) async {
-    emit(state.copyWith(suggestionsRequestState: RequestState.loading));
-    try {
-      final MoviesResponse suggestions = await useCases.getMovieSuggestionsUC.call(id);
-      emit(state.copyWith(
-        movieSuggestions: suggestions,
-        suggestionsRequestState: RequestState.success,
-      ));
-    } catch (e) {
-      emit(state.copyWith(suggestionsRequestState: RequestState.error));
-    }
-  }
+  // Future<void> getMovieSuggestionsById(int id) async {
+  //   emit(state.copyWith(suggestionsRequestState: RequestState.loading));
+  //   try {
+  //     final MoviesEntity suggestions = await useCases.getMovieSuggestionsUC.call(id);
+  //     emit(state.copyWith(
+  //       movieSuggestions: suggestions,
+  //       suggestionsRequestState: RequestState.success,
+  //     ));
+  //   } catch (e) {
+  //     emit(state.copyWith(suggestionsRequestState: RequestState.error));
+  //   }
+  // }
+
+
+
 
   Future<void> goToWatchMovie(String url) async {
     try{

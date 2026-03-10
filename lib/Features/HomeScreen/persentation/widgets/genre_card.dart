@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../../../Core/Models/MoviesResponse.dart';
+import 'package:movie_app/Core/Entities/movie_entity.dart';
 import '../../../../Core/Theme/app_colors.dart';
 import '../../../../Core/assets/App Components/movie_card.dart';
-import '../../../moviesDetails/persentation/movie_details_screen.dart';
+
 
 class GenreCard extends StatelessWidget {
   final String genre;
-  final List<Movies> movies;
-  Function onTap;
+  final List<MovieSimpleEntity> movies;
+  final Function onTap;
 
-  GenreCard({
-    Key? key,
+  const GenreCard({
+    super.key,
     required this.genre,
     required this.movies,
     required this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +45,7 @@ class GenreCard extends StatelessWidget {
               InkWell(
                 onTap: (){
                  onTap();
-                  },
+                 },
                 child: Text("See More", style: GoogleFonts.roboto(
                   color: AppColors.getAccentColor(),
                   fontSize: 16.sp,
@@ -68,7 +68,8 @@ class GenreCard extends StatelessWidget {
                   padding: const EdgeInsets.only(right: 16),
                   child: MovieCard(
                     rating: movie.rating ?? 0.0,
-                    imgURL: movie.mediumCoverImage ?? "", movieId: movie.id ?? 0,
+                    imgURL: movie.moviePoster ?? "",
+                    movieId: movie.id,
                   ),
                 );
               },

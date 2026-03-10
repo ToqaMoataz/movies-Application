@@ -24,10 +24,11 @@ class SmallInfoCard extends StatelessWidget {
           Text(
             info,
             style:GoogleFonts.roboto(
-                fontSize: 24.sp,
+                fontSize: 20.sp,
                 fontWeight: FontWeight.w700,
                 color: AppColors.getPrimaryTextColor()
             ),
+            overflow: TextOverflow.ellipsis,
           )
         ],
       ),

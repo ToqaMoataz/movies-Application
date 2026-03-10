@@ -5,8 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_app/Core/Theme/app_colors.dart';
 import 'package:movie_app/Core/assets/App%20Components/movie_card.dart';
-import 'package:movie_app/Core/assets/app_images.dart';
-import '../../../../../Authentication/persentation/Screens/Login Screen/login_screen.dart';
+import 'package:movie_app/Core/assets/App%20Images/app_images.dart';
+import '../../../../../Authentication/persentation/Screens/Login Screen/Screen/login_screen.dart';
 import '../../../../../Update and Delete profile/persentation/Update Profile Screen/update_profile_screen.dart';
 import '../../../HomeScreen cubit/cubit.dart';
 import '../../../HomeScreen cubit/state.dart';
@@ -130,6 +130,7 @@ class _ProfileScreenState extends State<ProfileTab>
                                   ),
 
                                   Expanded(
+                                    flex: 1,
                                     child: Column(
                                       children: [
                                         Text(
@@ -196,77 +197,70 @@ class _ProfileScreenState extends State<ProfileTab>
                                     flex: 2,
                                     child: SizedBox(
                                       height: 50.h,
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(left: 6),
-                                        child: ElevatedButton(
-                                          onPressed: () {
-                                            Navigator.pushNamed(
-                                              context,
-                                              UpdateProfileScreen.routeName,
-                                              arguments: user,
-                                            );
-                                          },
+                                      child: ElevatedButton(
+                                        onPressed: () {
+                                          Navigator.pushNamed(
+                                            context,
+                                            UpdateProfileScreen.routeName,
+                                            arguments: user,
+                                          );
+                                        },
 
-                                          style: ElevatedButton.styleFrom(
-                                            backgroundColor:
-                                                AppColors.getAccentColor(),
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadiusGeometry.circular(
-                                                    16.r,
-                                                  ),
-                                            ),
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor:
+                                              AppColors.getAccentColor(),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadiusGeometry.circular(
+                                                  16.r,
+                                                ),
                                           ),
-                                          child: Text(
-                                            "edit_profile_text".tr(),
-                                            style: GoogleFonts.roboto(
-                                              color: Colors.black,
-                                              fontSize: 16.sp,
-                                            ),
+                                        ),
+                                        child: Text(
+                                          "edit_profile_text".tr(),
+                                          style: GoogleFonts.roboto(
+                                            color: Colors.black,
+                                            fontSize: 16.sp,
                                           ),
                                         ),
                                       ),
                                     ),
                                   ),
-                                  SizedBox(width: 10.w),
+                                  SizedBox(width: 4.w),
                                   Expanded(
                                     flex: 1,
                                     child: SizedBox(
-                                      height: 50,
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(
-                                          right: 6,
-                                        ),
-                                        child: ElevatedButton(
-                                          onPressed: () {
-                                            _showSignOutDialog(context, cubit);
-                                          },
-                                          style: ElevatedButton.styleFrom(
-                                            backgroundColor:
-                                                AppColors.getActionColor(),
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(16),
+                                      height: 50.h,
+                                      child: ElevatedButton(
+                                        onPressed: () {
+                                          _showSignOutDialog(context, cubit);
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor:
+                                              AppColors.getActionColor(),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(
+                                              16.r,
                                             ),
                                           ),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceAround,
-                                            children: [
-                                              Text(
-                                                "exit_text".tr(),
-                                                style: GoogleFonts.roboto(
-                                                  color:
-                                                      AppColors.getPrimaryTextColor(),
-                                                  fontSize: 16.sp,
-                                                ),
+                                        ),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceAround,
+                                          children: [
+                                            Text(
+                                              "exit_text".tr(),
+                                              style: GoogleFonts.roboto(
+                                                color:
+                                                    AppColors.getPrimaryTextColor(),
+                                                fontSize: 16.sp,
                                               ),
-                                              Icon(
-                                                Icons.logout_outlined,
-                                                color: AppColors.getIconColor(),
-                                              ),
-                                            ],
-                                          ),
+                                            ),
+                                            Icon(
+                                              Icons.logout_outlined,
+                                              color: AppColors.getIconColor(),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ),
@@ -374,15 +368,23 @@ class _ProfileScreenState extends State<ProfileTab>
                                                     ?.length ??
                                                 0,
                                             itemBuilder: (context, index) {
-                                              final movie = cubit
-                                                  .state
-                                                  .toWatchMoviesResponse![index]
-                                                  .data
-                                                  .movie;
                                               return MovieCard(
-                                                rating: movie.rating,
-                                                imgURL: movie.mediumCoverImage,
-                                                movieId: movie.id,
+                                                rating:
+                                                    cubit
+                                                        .state
+                                                        .toWatchMoviesResponse![index]
+                                                        .rating ??
+                                                    0.0,
+                                                imgURL:
+                                                    cubit
+                                                        .state
+                                                        .toWatchMoviesResponse![index]
+                                                        .moviePoster ??
+                                                    AppImages.noImage,
+                                                movieId: cubit
+                                                    .state
+                                                    .toWatchMoviesResponse![index]
+                                                    .id,
                                               );
                                             },
                                           ),
@@ -424,15 +426,23 @@ class _ProfileScreenState extends State<ProfileTab>
                                                     ?.length ??
                                                 0,
                                             itemBuilder: (context, index) {
-                                              final movie = cubit
-                                                  .state
-                                                  .historyMoviesResponse![index]
-                                                  .data
-                                                  .movie;
                                               return MovieCard(
-                                                rating: movie.rating,
-                                                imgURL: movie.mediumCoverImage,
-                                                movieId: movie.id,
+                                                rating:
+                                                    cubit
+                                                        .state
+                                                        .historyMoviesResponse![index]
+                                                        .rating ??
+                                                    0.0,
+                                                imgURL:
+                                                    cubit
+                                                        .state
+                                                        .historyMoviesResponse![index]
+                                                        .moviePoster ??
+                                                    AppImages.noImage,
+                                                movieId: cubit
+                                                    .state
+                                                    .historyMoviesResponse![index]
+                                                    .id,
                                               );
                                             },
                                           ),
@@ -446,20 +456,17 @@ class _ProfileScreenState extends State<ProfileTab>
                     ],
                   ),
                 );
-              } else if (cubit.state.profileMoviesRequestState ==
-                  RequestState.error) {
-                return Center(
-                  child: Text(
-                    "something_went_wrong_text".tr(),
-                    style: GoogleFonts.roboto(
-                      fontSize: 20.sp,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.red,
-                    ),
-                  ),
-                );
               }
-              return SizedBox.shrink();
+              return Center(
+                child: Text(
+                  "something_went_wrong_text".tr(),
+                  style: GoogleFonts.roboto(
+                    fontSize: 20.sp,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.red,
+                  ),
+                ),
+              );
             },
           ),
         ),
@@ -508,7 +515,7 @@ class _ProfileScreenState extends State<ProfileTab>
           ElevatedButton(
             style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
             onPressed: () async {
-              Navigator.of(context).pop(); // close dialog
+              Navigator.of(context).pop();
               await cubit.signOut();
             },
             child: Text(

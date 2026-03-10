@@ -1,5 +1,5 @@
-import '../../../../Core/Models/movie_model.dart';
-import '../../../../../../Core/Models/MoviesResponse.dart';
+import 'package:movie_app/Core/Entities/movie_entity.dart';
+
 
 enum RequestState { init, loading, success, error }
 
@@ -8,20 +8,20 @@ class MovieDetailsStates {
   final RequestState tabIconState;
 
   final RequestState movieRequestState;
-  final RequestState suggestionsRequestState;
+
   final RequestState watchMovieRequestState;
 
-  final MovieResponse? movieResponse;
-  final MoviesResponse? movieSuggestions;
+  final MovieEntity? movieResponse;
+
 
   MovieDetailsStates({
     this.bookMarkTabbed = false,
     this.tabIconState = RequestState.init,
     this.movieRequestState = RequestState.init,
-    this.suggestionsRequestState = RequestState.init,
+
     this.watchMovieRequestState = RequestState.init,
     this.movieResponse,
-    this.movieSuggestions,
+
   });
 
   MovieDetailsStates copyWith({
@@ -30,19 +30,18 @@ class MovieDetailsStates {
     RequestState? movieRequestState,
     RequestState? suggestionsRequestState,
     RequestState? watchMovieRequestState,
-    MovieResponse? movieResponse,
-    MoviesResponse? movieSuggestions,
+    MovieEntity? movieResponse,
+    MoviesEntity? movieSuggestions,
   }) {
     return MovieDetailsStates(
       bookMarkTabbed: bookMarkTabbed ?? this.bookMarkTabbed,
       tabIconState: tabIconState ?? this.tabIconState,
       movieRequestState: movieRequestState ?? this.movieRequestState,
-      suggestionsRequestState:
-          suggestionsRequestState ?? this.suggestionsRequestState,
+
       watchMovieRequestState:
-          watchMovieRequestState ?? this.watchMovieRequestState,
+      watchMovieRequestState ?? this.watchMovieRequestState,
       movieResponse: movieResponse ?? this.movieResponse,
-      movieSuggestions: movieSuggestions ?? this.movieSuggestions,
+
     );
   }
 }

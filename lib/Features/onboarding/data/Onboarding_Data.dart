@@ -1,5 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:movie_app/Core/assets/app_images.dart';
+import 'package:movie_app/Core/assets/App%20Images/app_images.dart';
 
 
 class OnBoardingData {

@@ -1,6 +1,5 @@
-import 'package:movie_app/Core/Models/user_model.dart';
-import '../../../../Core/Models/MoviesResponse.dart';
-import '../../../../Core/Models/movie_model.dart';
+import 'package:movie_app/Core/Entities/movie_entity.dart';
+import 'package:movie_app/Core/Models/User/user_model.dart';
 
 abstract class HomeStates {}
 
@@ -11,13 +10,13 @@ class HomeState extends HomeStates {
   String? carouselBackgroundImg;
   UserModel? user;
 
-  MoviesResponse? moviesSearchResponse;
-  MoviesResponse? moviesBrowseResponse;
-  MoviesResponse? recentMoviesResponse;
+  MoviesEntity? moviesSearchResponse;
+  MoviesEntity? moviesBrowseResponse;
+  MoviesEntity? recentMoviesResponse;
 
-  List<Map<String, MoviesResponse>> moviesByGenreList;
-  List<MovieResponse>? toWatchMoviesResponse;
-  List<MovieResponse>? historyMoviesResponse;
+  List<Map<String, MoviesEntity>> moviesByGenreList;
+  List<MovieSimpleEntity>? toWatchMoviesResponse;
+  List<MovieSimpleEntity>? historyMoviesResponse;
 
 
   RequestState searchMoviesRequestState;
@@ -69,12 +68,12 @@ class HomeState extends HomeStates {
     RequestState? toWatchMoviesRequestState,
     RequestState? historyMoviesRequestState,
     RequestState? signOutRequestState,
-    MoviesResponse? moviesSearchResponse,
-    MoviesResponse? moviesBrowseResponse,
-    MoviesResponse? recentMoviesResponse,
-    List<Map<String, MoviesResponse>>? moviesByGenreList,
-    List<MovieResponse>? toWatchMoviesResponse,
-    List<MovieResponse>? historyMoviesResponse,
+    MoviesEntity? moviesSearchResponse,
+    MoviesEntity? moviesBrowseResponse,
+    MoviesEntity? recentMoviesResponse,
+    List<Map<String, MoviesEntity>>? moviesByGenreList,
+    List<MovieSimpleEntity>? toWatchMoviesResponse,
+    List<MovieSimpleEntity>? historyMoviesResponse,
     String? errorMessage,
     UserModel? user,
     bool? isVisible,

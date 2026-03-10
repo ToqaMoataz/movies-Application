@@ -1,11 +1,12 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:injectable/injectable.dart';
 import 'package:movie_app/Features/HomeScreen/data/Data%20Source/user_data_sources.dart';
 
 import '../../../../Core/Firebase/firebase_manager.dart';
-import '../../../../Core/Models/user_model.dart';
-
+import '../../../../Core/Models/User/user_model.dart';
+@LazySingleton(as: UserDataSources)
 class UserDataSourcesImpl extends UserDataSources{
   @override
   Future<UserModel?> readCurrUser() async {
@@ -17,7 +18,6 @@ class UserDataSourcesImpl extends UserDataSources{
       final user = snapshot.data();
       return user;
     } on FirebaseAuthException catch (e) {
-      print("🔥 FirebaseAuthException: $e");
       rethrow;
     }
   }
@@ -26,7 +26,7 @@ class UserDataSourcesImpl extends UserDataSources{
   Future<void> signOutUser() async {
     try {
       final user = FirebaseAuth.instance.currentUser;
-      GoogleSignIn _googleSignIn = GoogleSignIn();
+      GoogleSignIn googleSignIn = GoogleSignIn();
       if (user == null) {
         return;
       }
@@ -34,7 +34,7 @@ class UserDataSourcesImpl extends UserDataSources{
       bool isGoogleUser = user.providerData.any((provider) => provider.providerId == 'google.com');
 
       if (isGoogleUser) {
-        await _googleSignIn.signOut();
+        await googleSignIn.signOut();
       }
       await FirebaseAuth.instance.signOut();
 

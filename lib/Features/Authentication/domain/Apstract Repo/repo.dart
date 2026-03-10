@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../../../Core/Firebase/firebase_manager.dart';
-import '../../../../Core/Models/user_model.dart';
+import '../../../../Core/Models/User/user_model.dart';
 
 
 abstract class AuthRepository{

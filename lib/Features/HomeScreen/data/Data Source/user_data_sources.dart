@@ -1,4 +1,4 @@
-import '../../../../Core/Models/user_model.dart';
+import '../../../../Core/Models/User/user_model.dart';
 
 abstract class UserDataSources{
   Future<UserModel?> readCurrUser();

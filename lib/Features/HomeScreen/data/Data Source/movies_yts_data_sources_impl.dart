@@ -1,58 +1,25 @@
+import 'package:injectable/injectable.dart';
 import 'package:movie_app/Features/HomeScreen/data/Data%20Source/movies_data_sources.dart';
-import 'package:movie_app/Features/moviesDetails/data/Data%20Sources/dataSource.dart';
-
 import '../../../../Core/APIs/api_manager.dart';
 import '../../../../Core/APIs/endpoints.dart';
-import '../../../../Core/Models/MoviesResponse.dart';
-import '../../../../Core/Models/movie_model.dart';
-import '../../../moviesDetails/data/Repo Imlementation/movie_details_repo_Imp.dart';
-import '../../../moviesDetails/domain/Movies Details Repo/movie_details_repo.dart';
+import '../../../../Core/Models/Movie/YTS  Response Models/yts_movie_response.dart';
+import '../../../../Core/Models/Movie/YTS  Response Models/yts_movies_response.dart';
 
-class MoviesDataSourcesImpl extends MoviesDataSources{
-  ApiManager api=ApiManager();
-  MovieDetailsRepo repo=MovieDetailsRepoImp(MoviesDetailsImpDs());
 
-  /////////// List_Movies
+@Named("HomeYTS")
+@LazySingleton()
+class MoviesYTSDataSourcesImpl
+    implements MoviesDataSources<MoviesResponse, MovieResponse> {
+  ApiManager api;
+
+  MoviesYTSDataSourcesImpl(this.api);
 
   @override
-  Future<MoviesResponse> searchMovies(String movieName) async {
-    try {
-      var response = await api.getApi(YTSEndpoints.listMoviesEndpoint, params: {
-        "query_term": movieName
-      });
-      MoviesResponse result = MoviesResponse.fromJson(response.data);
-      return result;
-    }catch(e){
-      rethrow;
-    }
-  }
-
-  //browse_movies
-  @override
-  Future<MoviesResponse> listMoviesByGenre(String genre) async {
+  Future<MoviesResponse?> searchMovies(String movieName) async {
     try {
       var response = await api.getApi(
         YTSEndpoints.listMoviesEndpoint,
-        params: {
-          "genre": genre,
-        },
-      );
-      MoviesResponse result = MoviesResponse.fromJson(response.data);
-      return result;
-    } catch (e) {
-      rethrow;
-    }
-  }
-  //browse_movies
-  @override
-  Future<MoviesResponse> listLimitMoviesByGenre(String genre,int limit) async {
-    try {
-      var response = await api.getApi(
-        YTSEndpoints.listMoviesEndpoint,
-        params: {
-          "genre": genre,
-          "limit": limit,
-        },
+        params: {"query_term": movieName},
       );
       MoviesResponse result = MoviesResponse.fromJson(response.data);
       return result;
@@ -61,37 +28,72 @@ class MoviesDataSourcesImpl extends MoviesDataSources{
     }
   }
 
+  //browse_movies
+  @override
+  Future<MoviesResponse?> listMoviesByGenre(dynamic genre) async {
+    try {
+      var response = await api.getApi(
+        YTSEndpoints.listMoviesEndpoint,
+        params: {"genre": genre},
+      );
+      MoviesResponse result = MoviesResponse.fromJson(response.data);
+      return result;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<MoviesResponse?> listLimitMoviesByGenre(
+    dynamic genre,
+    int limit,
+  ) async {
+    if (genre is int) {
+      throw Exception("YTS does not support Genre ID (Int). Use TMDB instead.");
+    }
+    try {
+      var response = await api.getApi(
+        YTSEndpoints.listMoviesEndpoint,
+        params: {"genre": genre, "limit": limit},
+      );
+      MoviesResponse? result = MoviesResponse.fromJson(response.data);
+      return result;
+    } catch (e) {
+      rethrow;
+    }
+  }
 
   //recent_movies
   @override
-  Future<MoviesResponse> getRecentMovies() async {
+  Future<MoviesResponse?> getRecentMovies() async {
     try {
-      var response = await api.getApi(YTSEndpoints.listMoviesEndpoint, params: {
-        "sort_by": "year",
-        "order_by": "desc",
-        "limit": 10,
-      });
-      MoviesResponse result = MoviesResponse.fromJson(response.data);
+      var response = await api.getApi(
+        YTSEndpoints.listMoviesEndpoint,
+        params: {"sort_by": "year", "order_by": "desc", "limit": 10},
+      );
+      MoviesResponse? result = MoviesResponse.fromJson(response.data);
       return result;
-    }catch(e){
+    } catch (e) {
       rethrow;
     }
   }
-
 
   @override
-  Future<MoviesResponse> getMovieSuggestionsById(int id) async {
+  Future<List<MovieResponse>?> getMoviesByIDs(List<int> ids) async {
     try {
-      var response = await api.getApi(YTSEndpoints.movieSuggestionsEndpoint,
-          params: {
-            "movie_id": id
-          }
+      final responses = await Future.wait(
+        ids.map((id) async {
+          var response = await api.getApi(
+            YTSEndpoints.movieDetailsEndpoint,
+            params: {"movie_id": id, "with_images": true, "with_cast": true},
+          );
+          return MovieResponse.fromJson(response.data);
+        }),
       );
-      MoviesResponse result = MoviesResponse.fromJson(response.data);
-      return result;
-    }catch(e){
+
+      return responses;
+    } catch (e) {
       rethrow;
     }
   }
-
 }

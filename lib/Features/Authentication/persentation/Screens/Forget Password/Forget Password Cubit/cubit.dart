@@ -1,8 +1,9 @@
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 import 'package:movie_app/Features/Authentication/domain/Use%20Cases/forgetPass_usecase.dart';
-import 'package:movie_app/Features/Authentication/persentation/Screens/Forget%20Password%20Screen/Forget%20Password%20Cubit/states.dart';
-
+import 'package:movie_app/Features/Authentication/persentation/Screens/Forget%20Password/Forget%20Password%20Cubit/states.dart';
+@injectable
 class ForgetPassCubit extends Cubit<ForgetPassState>{
   ForgetPassCubit(this.useCase) : super(ForgetPassInitialState());
   static ForgetPassCubit get(context)=>BlocProvider.of<ForgetPassCubit>(context);

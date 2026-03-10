@@ -1,14 +1,15 @@
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 import 'package:movie_app/Features/Update%20and%20Delete%20profile/domail/Edit%20Profile%20repo/update_profile_repo.dart';
 import 'package:movie_app/Features/Update%20and%20Delete%20profile/domail/Use%20Cases/updateProfile_base_usecase.dart';
 import 'package:movie_app/Features/Update%20and%20Delete%20profile/persentation/update%20and%20delete%20cubit/states.dart';
 
-import '../../../../Core/Models/user_model.dart';
+import '../../../../Core/Models/User/user_model.dart';
 
 import '../../../HomeScreen/domain/Abstract repo/user_repo.dart';
 
-
+@injectable
 class UpdateProfileCubit extends Cubit<UpdateProfileState> {
   UpdateProfileUseCases profileUseCases;
   UpdateProfileCubit(this.profileUseCases) : super(UpdateProfileInitState());

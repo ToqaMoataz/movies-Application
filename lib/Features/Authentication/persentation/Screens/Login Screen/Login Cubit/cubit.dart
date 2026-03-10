@@ -2,11 +2,13 @@
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 import 'package:movie_app/Features/Authentication/persentation/Screens/Login%20Screen/Login%20Cubit/states.dart';
 
-import '../../../../../../Core/Models/user_model.dart';
+import '../../../../../../Core/Models/User/user_model.dart';
 import '../../../../domain/Use Cases/login_usecase.dart';
 
+@injectable
 class LoginCubit extends Cubit<LoginState> {
   final LoginUseCase loginUseCase;
 
@@ -14,6 +16,10 @@ class LoginCubit extends Cubit<LoginState> {
 
   static LoginCubit get(context) => BlocProvider.of(context);
 
+
+  void togglePassVisibility(){
+    emit(state.copyWith(passVisible: !state.passVisible));
+  }
 
   Future<void> login({required String email, required String password}) async {
     try {

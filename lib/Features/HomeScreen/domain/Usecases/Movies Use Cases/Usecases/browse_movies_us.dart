@@ -1,14 +1,22 @@
 
+import 'package:injectable/injectable.dart';
 
-import '../../../../../../Core/Models/MoviesResponse.dart';
-import '../../../../data/Repo Implementation/movie_remote_repo_imp.dart';
+import '../../../../../../Core/Entities/movie_entity.dart';
 
+import '../../../Abstract repo/movies_repo.dart';
 
+@injectable
 class BrowseMoviesUC{
-  final MoviesRemoteRepository moviesRepo;
+  final MoviesRepository moviesRepo;
   BrowseMoviesUC(this.moviesRepo);
 
-  Future<MoviesResponse> call(String genre) {
-    return moviesRepo.listMoviesByGenre(genre);
+  Future<MoviesEntity?> call(dynamic genre) async {
+    try{
+      MoviesEntity? response=await moviesRepo.listMoviesByGenre(genre);
+      return response;
+    }catch(e){
+      rethrow;
+    }
+
   }
 }

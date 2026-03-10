@@ -1,27 +1,24 @@
+import 'package:injectable/injectable.dart';
 import 'package:movie_app/Features/HomeScreen/data/Data%20Source/movies_data_sources.dart';
-import 'package:movie_app/Features/moviesDetails/data/Data%20Sources/dataSource.dart';
-
 import '../../../../Core/APIs/api_manager.dart';
 import '../../../../Core/APIs/endpoints.dart';
-import '../../../../Core/Models/MoviesResponse.dart';
-import '../../../../Core/Models/movie_model.dart';
-import '../../../moviesDetails/data/Repo Imlementation/movie_details_repo_Imp.dart';
-import '../../../moviesDetails/domain/Movies Details Repo/movie_details_repo.dart';
+import '../../../../Core/Models/Movie/TMBD Response Models/tmdb_movies_response_model.dart';
 
-class MoviesTmdbDataSourcesImpl extends MoviesDataSources{
-  ApiManager api=ApiManager();
-  MovieDetailsRepo repo=MovieDetailsRepoImp(MoviesDetailsImpDs());
+@Named("HomeTMDB")
+@LazySingleton()
+class MoviesTmdbDataSourcesImpl implements MoviesDataSources<TMDBMovieResponse,TMDBMovie>{
+  ApiManager api;
 
-  MoviesTmdbDataSourcesImpl(this.repo);
-  /////////// List_Movies
+  MoviesTmdbDataSourcesImpl(this.api);
+
 
   @override
-  Future<MoviesResponse> searchMovies(String movieName) async {
+  Future<TMDBMovieResponse> searchMovies(String movieName) async {
     try {
-      var response = await api.getApi(YTSEndpoints.listMoviesEndpoint, params: {
-        "query_term": movieName
+      var response = await api.getApi(TMDBEndpoints.searchMoviesEndpoint, params: {
+        "query": movieName
       });
-      MoviesResponse result = MoviesResponse.fromJson(response.data);
+      TMDBMovieResponse result = TMDBMovieResponse.fromJson(response.data);
       return result;
     }catch(e){
       rethrow;
@@ -30,32 +27,34 @@ class MoviesTmdbDataSourcesImpl extends MoviesDataSources{
 
   //browse_movies
   @override
-  Future<MoviesResponse> listMoviesByGenre(String genre) async {
+  Future<TMDBMovieResponse> listMoviesByGenre(dynamic genre) async {
     try {
       var response = await api.getApi(
-        YTSEndpoints.listMoviesEndpoint,
+        TMDBEndpoints.listMoviesEndpoint,
         params: {
-          "genre": genre,
+          "with_genres": genre,
         },
       );
-      MoviesResponse result = MoviesResponse.fromJson(response.data);
+      TMDBMovieResponse result = TMDBMovieResponse.fromJson(response.data);
       return result;
     } catch (e) {
+      print("Data Source: ${e.toString()}");
       rethrow;
     }
   }
-  //browse_movies
+
+
   @override
-  Future<MoviesResponse> listLimitMoviesByGenre(String genre,int limit) async {
+  Future<TMDBMovieResponse> listLimitMoviesByGenre(dynamic genre,int limit) async {
     try {
       var response = await api.getApi(
-        YTSEndpoints.listMoviesEndpoint,
+        TMDBEndpoints.listMoviesEndpoint,
         params: {
-          "genre": genre,
-          "limit": limit,
+          "with_genres": genre,
+          "page":1
         },
       );
-      MoviesResponse result = MoviesResponse.fromJson(response.data);
+      TMDBMovieResponse result = TMDBMovieResponse.fromJson(response.data);
       return result;
     } catch (e) {
       rethrow;
@@ -65,36 +64,27 @@ class MoviesTmdbDataSourcesImpl extends MoviesDataSources{
 
   //recent_movies
   @override
-  Future<MoviesResponse> getRecentMovies() async {
+  Future<TMDBMovieResponse> getRecentMovies() async {
     try {
-      var response = await api.getApi(YTSEndpoints.listMoviesEndpoint, params: {
-        "sort_by": "year",
-        "order_by": "desc",
-        "limit": 10,
+      var response = await api.getApi(TMDBEndpoints.listTopRatedMovies, params: {
+        "page": 1,
       });
-      MoviesResponse result = MoviesResponse.fromJson(response.data);
+      TMDBMovieResponse result = TMDBMovieResponse.fromJson(response.data);
       return result;
     }catch(e){
       rethrow;
     }
   }
 
-
-
-  /////////// Movie_Details
-  //list_of_movies
   @override
-  Future<List<MovieResponse>> getMoviesByIDs(List<int> ids) async {
+  Future<List<TMDBMovie>> getMoviesByIDs(List<int> ids) async {
     try {
-      // var response = await api.getApi(
-      //   YTSEndpoints.movieDetailsEndpoint,
-      //   params: {"movie_id": id, "with_images": true, "with_cast": true},
-      // );
-      // MovieResponse result = MovieResponse.fromJson(response.data);
-      // return result;
-      final responses = await Future.wait(
-        ids.map((id) => repo.getMovieByID(id)),
-      );
+      final responses = await Future.wait(ids.map((id) async {
+        var response = await api.getApi(
+          TMDBEndpoints.movieDetailsEndpoint(id),
+        );
+        return TMDBMovie.fromJson(response.data);
+      }));
 
       return responses;
     } catch (e) {
@@ -102,19 +92,8 @@ class MoviesTmdbDataSourcesImpl extends MoviesDataSources{
     }
   }
 
-  @override
-  Future<MoviesResponse> getMovieSuggestionsById(int id) async {
-    try {
-      var response = await api.getApi(YTSEndpoints.movieSuggestionsEndpoint,
-          params: {
-            "movie_id": id
-          }
-      );
-      MoviesResponse result = MoviesResponse.fromJson(response.data);
-      return result;
-    }catch(e){
-      rethrow;
-    }
-  }
+
+
+
 
 }

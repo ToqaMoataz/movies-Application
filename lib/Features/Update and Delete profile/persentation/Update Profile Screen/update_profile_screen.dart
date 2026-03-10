@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:movie_app/Core/Models/user_model.dart';
+import 'package:movie_app/Core/Models/User/user_model.dart';
 import 'package:movie_app/Features/Update%20and%20Delete%20profile/persentation/components/dialog_to_show.dart';
 import 'package:movie_app/Features/Update%20and%20Delete%20profile/persentation/update%20and%20delete%20cubit/cubit.dart';
 import 'package:movie_app/Features/Update%20and%20Delete%20profile/persentation/update%20and%20delete%20cubit/states.dart';
 import '../../../../Core/Theme/app_colors.dart';
-import '../../../Authentication/persentation/Screens/Forget Password Screen/forget_password_screen.dart';
-import '../../../Authentication/persentation/Screens/Login Screen/login_screen.dart';
-import '../../../HomeScreen/persentation/Home Screen/Screen/home_Screen.dart';
+import '../../../Authentication/persentation/Screens/Forget Password/Screen/forget_password_screen.dart';
+import '../../../Authentication/persentation/Screens/Login Screen/Screen/login_screen.dart';
+import '../../../HomeScreen/persentation/Home Screen/Screen/home_screen.dart';
 
 class UpdateProfileScreen extends StatefulWidget {
   static const String routeName = "updateProfile";

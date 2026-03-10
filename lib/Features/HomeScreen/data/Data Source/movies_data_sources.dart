@@ -1,11 +1,14 @@
-import '../../../../Core/Models/MoviesResponse.dart';
-import '../../../../Core/Models/movie_model.dart';
 
-abstract class MoviesDataSources{
-  Future<MoviesResponse> searchMovies(String movieName);
-  Future<MoviesResponse> listMoviesByGenre(String genre);
-  Future<MoviesResponse> listLimitMoviesByGenre(String genre,int limit);
-  Future<MoviesResponse> getRecentMovies();
-  Future<List<MovieResponse>> getMoviesByIDs(List<int> ids);
-  Future<MoviesResponse> getMovieSuggestionsById(int id);
+
+abstract class MoviesDataSources<TMovies, TMovie> {
+  Future<TMovies?> searchMovies(String movieName);
+
+  Future<TMovies?> listMoviesByGenre(genre);
+
+  Future<TMovies?> listLimitMoviesByGenre(dynamic genre, int limit);
+
+  Future<TMovies?> getRecentMovies();
+
+  Future<List<TMovie>?> getMoviesByIDs(List<int> ids);
+
 }

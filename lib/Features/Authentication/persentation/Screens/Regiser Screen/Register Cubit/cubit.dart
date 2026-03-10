@@ -1,9 +1,11 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../../../Core/Models/user_model.dart';
+import 'package:injectable/injectable.dart';
+import '../../../../../../Core/Models/User/user_model.dart';
 
 import '../../../../domain/Use Cases/register_usecase.dart';
 import 'states.dart';
 
+@injectable
 class RegisterCubit extends Cubit<RegisterState> {
   final RegisterUseCase useCase;
 

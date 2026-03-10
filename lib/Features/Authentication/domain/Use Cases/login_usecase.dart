@@ -1,8 +1,11 @@
 
 
-import '../../../../Core/Models/user_model.dart';
+import 'package:injectable/injectable.dart';
+
+import '../../../../Core/Models/User/user_model.dart';
 import '../Apstract Repo/repo.dart';
 
+@injectable
 class LoginUseCase {
   AuthRepository repo;
   LoginUseCase(this.repo);

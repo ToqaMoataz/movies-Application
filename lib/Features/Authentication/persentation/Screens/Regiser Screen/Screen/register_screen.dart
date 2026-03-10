@@ -5,16 +5,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:movie_app/Core/assets/app_images.dart';
+import 'package:movie_app/Core/Dependency%20Injection/di.dart';
+import 'package:movie_app/Core/assets/App%20Images/app_images.dart';
 import 'package:movie_app/Features/Authentication/data/Repository%20Implementation/repo_implemantation.dart';
 import 'package:movie_app/Features/Authentication/data/data%20source/data%20source.dart';
 import 'package:movie_app/Features/Authentication/domain/Use%20Cases/register_usecase.dart';
 import 'package:movie_app/Features/Authentication/persentation/Screens/Regiser%20Screen/Register%20Cubit/cubit.dart';
 import 'package:movie_app/Features/Authentication/persentation/Screens/Regiser%20Screen/Register%20Cubit/states.dart';
-import 'package:movie_app/Features/HomeScreen/persentation/Home%20Screen/Screen/home_Screen.dart';
-import '../../../../../Core/Models/user_model.dart';
-import '../../../../../Core/Theme/app_colors.dart';
-import '../Login Screen/login_screen.dart';
+import 'package:movie_app/Features/HomeScreen/persentation/Home%20Screen/Screen/home_screen.dart';
+import '../../../../../../Core/Models/User/user_model.dart';
+import '../../../../../../Core/Theme/app_colors.dart';
+import '../../Login Screen/Screen/login_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
   static const String routeName = "registerScreen";
@@ -62,8 +63,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: BlocProvider(
-            create: (context) => RegisterCubit(
-                RegisterUseCase(AuthRepositoryImplementation(AuthDataSource()))),
+            create: (context) => getIt<RegisterCubit>(),
             child: BlocConsumer<RegisterCubit, RegisterState>(
               listener: (context, state) {
                 if (state.registerRequestState == RequestState.success) {

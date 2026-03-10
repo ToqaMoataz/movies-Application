@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_app/Core/Theme/app_colors.dart';
-import 'package:movie_app/Core/assets/app_images.dart';
+import 'package:movie_app/Core/assets/App%20Images/app_images.dart';
 import '../../../../../../../Core/assets/App Components/movie_card.dart';
 import '../../../HomeScreen cubit/cubit.dart';
 import '../../../HomeScreen cubit/state.dart';
@@ -89,7 +89,7 @@ class _SearchTabState extends State<SearchTab> {
           child: BlocBuilder<HomeCubit, HomeStates>(
             builder: (context, state) {
               var cubit = HomeCubit.get(context);
-              var movies = cubit.state.moviesSearchResponse?.data?.movies;
+              var movies = cubit.state.moviesSearchResponse?.movies;
 
               if (_searchController.text.isEmpty) {
                 return Center(
@@ -128,9 +128,9 @@ class _SearchTabState extends State<SearchTab> {
                   itemCount: movies.length,
                   itemBuilder: (context, index) {
                     return MovieCard(
-                      imgURL: movies[index].mediumCoverImage ?? "",
+                      imgURL: movies[index].moviePoster ?? "",
                       rating: movies[index].rating ?? 0.0,
-                      movieId: movies[index].id ?? 0,
+                      movieId: movies[index].id,
                     );
                   },
                 );

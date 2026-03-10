@@ -11,7 +11,7 @@ import '../../../HomeScreen cubit/state.dart';
 
 class BrowseTab extends StatelessWidget {
   BrowseTab({super.key});
-  List<String> genre=AppData.getMoviesGenres();
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -26,7 +26,7 @@ class BrowseTab extends StatelessWidget {
             height: MediaQuery.of(context).size.height*0.05,
             child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: genre.length,
+                itemCount: AppData.tmdbGenresList.length,
                 itemBuilder: (context,i){
                   return InkWell(
                     onTap: (){
@@ -46,7 +46,7 @@ class BrowseTab extends StatelessWidget {
                           ),
                         ),
                         child: Text(
-                          genre[i],
+                          AppData.tmdbGenresList[i].values.first,
                           style: GoogleFonts.inter(
                             fontSize: 20.sp,
                             fontWeight: FontWeight.w700,
@@ -65,7 +65,7 @@ class BrowseTab extends StatelessWidget {
           child: BlocBuilder<HomeCubit, HomeStates>(
             builder: (context, state) {
               var cubit = HomeCubit.get(context);
-              var movies = cubit.state.moviesBrowseResponse?.data?.movies;
+              var movies = cubit.state.moviesBrowseResponse?.movies;
               if (cubit.state.browseMoviesRequestState==RequestState.loading) {
                 return Center(
                   child: CircularProgressIndicator(
@@ -96,9 +96,9 @@ class BrowseTab extends StatelessWidget {
                   itemCount: movies.length,
                   itemBuilder: (context, index) {
                     return MovieCard(
-                      imgURL: movies[index].mediumCoverImage ?? "",
+                      imgURL: movies[index].moviePoster ?? "",
                       rating: movies[index].rating ?? 0.0,
-                      movieId: movies[index].id ?? 0,
+                      movieId: movies[index].id,
                     );
                   },
                 );

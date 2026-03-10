@@ -1,6 +1,8 @@
 
-import '../Apstract Repo/repo.dart';
+import 'package:injectable/injectable.dart';
 
+import '../Apstract Repo/repo.dart';
+@injectable
 class ForgetPasswordUseCase {
   AuthRepository repo;
   ForgetPasswordUseCase(this.repo);

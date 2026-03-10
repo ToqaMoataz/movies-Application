@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_app/Core/Theme/app_colors.dart';
+import 'package:movie_app/Core/assets/App%20Images/app_images.dart';
 
 class CastComponent extends StatelessWidget {
-  CastComponent({super.key,required this.imgUrl,required this.actorName,required this.characterName});
-  String imgUrl;
+  CastComponent({super.key, this.imgUrl,required this.actorName,required this.characterName});
+  String? imgUrl;
   String actorName;
   String characterName;
   @override
@@ -22,8 +23,8 @@ class CastComponent extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(10.r),
-            child: Image.network(
-              imgUrl,
+            child: (imgUrl!=null) ? Image.network(
+              imgUrl!,
               height: 70.h,
               fit: BoxFit.cover,
               errorBuilder: (context, error, stackTrace) {
@@ -33,7 +34,7 @@ class CastComponent extends StatelessWidget {
                   fit: BoxFit.cover,
                 );
               },
-            ),
+            ) : Image.asset(AppImages.noImage)
           ),
           SizedBox(width: 8.w),
           Expanded(

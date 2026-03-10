@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../Models/user_model.dart';
+import '../Models/User/user_model.dart';
 
 class FirebaseManager {
   //Users//

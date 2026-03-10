@@ -1,6 +1,8 @@
 
-import '../../../Abstract repo/user_repo.dart';
+import 'package:injectable/injectable.dart';
 
+import '../../../Abstract repo/user_repo.dart';
+@injectable
 class SignOutUC {
   final UserRepo repo;
 

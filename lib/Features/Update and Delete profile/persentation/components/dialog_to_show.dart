@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_app/Core/Theme/app_colors.dart';
-import 'package:movie_app/Core/assets/app_images.dart';
+import 'package:movie_app/Core/assets/App%20Images/app_images.dart';
 
 import '../update and delete cubit/cubit.dart';
 import '../update and delete cubit/states.dart';

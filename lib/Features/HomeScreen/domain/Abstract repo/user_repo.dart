@@ -5,7 +5,7 @@ import 'package:movie_app/Core/Firebase/firebase_manager.dart';
 import 'package:movie_app/Features/HomeScreen/data/Data%20Source/user_data_sources.dart';
 import 'package:movie_app/Features/HomeScreen/data/Data%20Source/user_data_sources_impl.dart';
 
-import '../../../../Core/Models/user_model.dart';
+import '../../../../Core/Models/User/user_model.dart';
 
 
 abstract class UserRepo{

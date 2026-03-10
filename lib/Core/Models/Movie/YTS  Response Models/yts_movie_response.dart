@@ -57,7 +57,6 @@ class Movie {
   String mediumCoverImage;
   String largeCoverImage;
 
-  // ✅ Added screenshots
   String mediumScreenshot1;
   String mediumScreenshot2;
   String mediumScreenshot3;
@@ -65,7 +64,6 @@ class Movie {
   String largeScreenshot2;
   String largeScreenshot3;
 
-  // ✅ Added cast
   List<Cast> cast;
 
   List<Torrent> torrents;

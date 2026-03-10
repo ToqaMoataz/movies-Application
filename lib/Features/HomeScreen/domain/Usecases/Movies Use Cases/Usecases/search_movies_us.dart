@@ -1,13 +1,22 @@
-import '../../../../../../Core/Models/MoviesResponse.dart';
+import 'package:injectable/injectable.dart';
+import 'package:movie_app/Core/Entities/movie_entity.dart';
+
 import '../../../../data/Repo Implementation/movie_remote_repo_imp.dart';
+import '../../../Abstract repo/movies_repo.dart';
 
-
+@injectable
 class SearchMoviesUC {
-  final MoviesRemoteRepository moviesRepo;
+  final MoviesRepository moviesRepo;
 
   SearchMoviesUC(this.moviesRepo);
 
-  Future<MoviesResponse> call(String movieName) async {
-    return await moviesRepo.searchMovies(movieName);
+  Future<MoviesEntity?> call(String movieName) async {
+    try{
+      MoviesEntity? response= await moviesRepo.searchMovies(movieName);
+      return response;
+    }catch(e){
+      rethrow;
+    }
+
   }
 }

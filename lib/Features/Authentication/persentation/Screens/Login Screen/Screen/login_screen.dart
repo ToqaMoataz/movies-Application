@@ -7,15 +7,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_app/Core/Theme/app_colors.dart';
-import 'package:movie_app/Core/assets/app_images.dart';
-import 'package:movie_app/Features/Authentication/domain/Use%20Cases/login_usecase.dart';
+import 'package:movie_app/Core/assets/App%20Images/app_images.dart';
 import 'package:movie_app/Features/Authentication/persentation/Screens/Login%20Screen/Login%20Cubit/cubit.dart';
-import 'package:movie_app/Features/HomeScreen/persentation/Home%20Screen/Screen/home_Screen.dart';
-import '../../../data/Repository Implementation/repo_implemantation.dart';
-import '../../../data/data source/data source.dart';
-import '../Forget Password Screen/forget_password_screen.dart';
-import '../Regiser Screen/register_screen.dart';
-import 'Login Cubit/states.dart';
+import 'package:movie_app/Features/HomeScreen/persentation/Home%20Screen/Screen/home_screen.dart';
+import '../../../../../../Core/Dependency Injection/di.dart';
+import '../../Forget Password/Screen/forget_password_screen.dart';
+import '../../Regiser Screen/Screen/register_screen.dart';
+import '../Login Cubit/states.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String routeName="loginScreen";
@@ -28,7 +26,6 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen>{
   final _formKey = GlobalKey<FormState>();
 
-  bool passwordVisible = false;
 
   final TextEditingController _emailController = TextEditingController();
 
@@ -47,8 +44,7 @@ class _LoginScreenState extends State<LoginScreen>{
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: BlocProvider(
-        create: (context) =>
-            LoginCubit(LoginUseCase(AuthRepositoryImplementation(AuthDataSource()))),
+        create: (context) => getIt<LoginCubit>(),
         child: BlocConsumer<LoginCubit, LoginState>(
           builder: (context, state) {
             return Padding(
@@ -130,7 +126,7 @@ class _LoginScreenState extends State<LoginScreen>{
                                 Expanded(
                                   child: TextFormField(
                                     controller: _passwordController,
-                                    obscureText: !passwordVisible,
+                                    obscureText: state.passVisible,
                                     style: GoogleFonts.roboto(
                                       fontWeight: FontWeight.w400,
                                       fontSize: 16.sp,
@@ -155,12 +151,10 @@ class _LoginScreenState extends State<LoginScreen>{
                                 ),
                                 IconButton(
                                   onPressed: () {
-                                    setState(() {
-                                      passwordVisible = !passwordVisible;
-                                    });
+                                   LoginCubit.get(context).togglePassVisibility();
                                   },
                                   icon: Icon(
-                                    passwordVisible
+                                    state.passVisible
                                         ? Icons.visibility_outlined
                                         : Icons.visibility_off_outlined,
                                     color: AppColors.getIconColor(),

@@ -3,16 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:movie_app/Core/assets/app_images.dart';
-import 'package:movie_app/Features/Authentication/data/Repository%20Implementation/repo_implemantation.dart';
-import 'package:movie_app/Features/Authentication/data/data%20source/data%20source.dart';
-import 'package:movie_app/Features/Authentication/domain/Use%20Cases/forgetPass_usecase.dart';
-import 'package:movie_app/Features/Authentication/persentation/Screens/Forget%20Password%20Screen/Forget%20Password%20Cubit/cubit.dart';
+import 'package:movie_app/Core/Dependency%20Injection/di.dart';
+import 'package:movie_app/Core/assets/App%20Images/app_images.dart';
 
-import '../../../../../Core/Theme/app_colors.dart';
-import '../../../../HomeScreen/persentation/HomeScreen cubit/state.dart';
-import '../Login Screen/login_screen.dart';
-import 'Forget Password Cubit/states.dart' hide RequestState;
+import '../../../../../../Core/Theme/app_colors.dart';
+import '../../../../../HomeScreen/persentation/HomeScreen cubit/state.dart';
+import '../../Login Screen/Screen/login_screen.dart';
+import '../Forget Password Cubit/cubit.dart';
+import '../Forget Password Cubit/states.dart' hide RequestState;
 
 
 
@@ -84,11 +82,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
               ),
             ),
             BlocProvider(
-              create: (context) => ForgetPassCubit(
-                ForgetPasswordUseCase(
-                  AuthRepositoryImplementation(AuthDataSource()),
-                ),
-              ),
+              create: (context) => getIt<ForgetPassCubit>(),
               child: BlocConsumer<ForgetPassCubit, ForgetPassState>(
                 listener: (context, state) {
                   if (state.forgetPassRequestState == RequestState.success) {

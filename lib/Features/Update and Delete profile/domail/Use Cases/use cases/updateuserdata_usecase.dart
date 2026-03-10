@@ -1,5 +1,7 @@
-import '../../Edit Profile repo/update_profile_repo.dart';
+import 'package:injectable/injectable.dart';
 
+import '../../Edit Profile repo/update_profile_repo.dart';
+@injectable
 class UpdateUserDataUC {
   final UpdateProfileRepo repo;
 
