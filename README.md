@@ -87,7 +87,17 @@ You can access the Firebase project here:
 3. Movies are fetched from the API  
 4. User can search, browse, and view details  
 5. User can save movies to their watch list  
-6. Watch history is stored per user  
+6. Watch history is stored per user
+
+---
+
+## Update
+
+### March 2026
+- Added TMDB API as a fallback data source when the original YTS API fails.  
+- This ensures the app continues to fetch movie details even if the YTS server is down.  
+- TMDB API documentation: [Getting Started](https://developer.themoviedb.org/reference/getting-started)
+
 
 ---
 
