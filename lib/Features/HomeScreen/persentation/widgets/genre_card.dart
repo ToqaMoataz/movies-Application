@@ -46,13 +46,19 @@ class GenreCard extends StatelessWidget {
                 onTap: (){
                  onTap();
                  },
-                child: Text("See More", style: GoogleFonts.roboto(
-                  color: AppColors.getAccentColor(),
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.w400,
-                  height: 1.2,
-                  letterSpacing: 0,
-                )),
+                child: Row(
+                  children: [
+                    Text("See More", style: GoogleFonts.roboto(
+                      color: AppColors.getAccentColor(),
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w400,
+                      height: 1.2,
+                      letterSpacing: 0,
+                    )),
+                    SizedBox(width: 2.w,),
+                    Icon(Icons.arrow_forward,color: AppColors.getAccentColor(),)
+                  ],
+                ),
               ),
             ],
           ),

@@ -16,6 +16,7 @@
   "register_heading": "Register",
 
   "delete_account_text": "Delete Account",
+  "delete_text": "Delete",
   "delete_account_confirm_text": "Are you sure you want to delete this account?",
   "update_data_text": "Update Data",
   "edit_profile_text": "Edit Profile",
