@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -48,7 +49,7 @@ class GenreCard extends StatelessWidget {
                  },
                 child: Row(
                   children: [
-                    Text("See More", style: GoogleFonts.roboto(
+                    Text("see_more_text".tr(), style: GoogleFonts.roboto(
                       color: AppColors.getAccentColor(),
                       fontSize: 16.sp,
                       fontWeight: FontWeight.w400,
