@@ -9,12 +9,12 @@ import '../update and delete cubit/states.dart';
 
 class DialogToShow extends StatelessWidget {
   DialogToShow({super.key});
-   List<String> userImages=AppImages.getUserImages();
+  final List<String> userImages=AppImages.getUserImages();
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<UpdateProfileCubit,UpdateProfileStates>(
       builder: (BuildContext context, state) {
-        String image=UpdateProfileCubit.get(context).state.selectedImage;
+
         return Container(
           decoration: BoxDecoration(
             color: AppColors.getPrimaryColor(),
@@ -35,8 +35,6 @@ class DialogToShow extends StatelessWidget {
                 return GestureDetector(
                     onTap: () {
                       UpdateProfileCubit.get(context).setSelectedImage(userImages[index]);
-                      print("user image${userImages[index]}");
-                      print("user image${UpdateProfileCubit.get(context).state.selectedImage}");
                     },
                     child:Container(
                       height: 10.h,
@@ -47,7 +45,7 @@ class DialogToShow extends StatelessWidget {
                             ? AppColors.getAccentColor()
                             : Colors.transparent,
                         border: Border.all(
-                          color: Color(0X8FF6BD00),
+                          color:AppColors.getAccentColor(),
                           style: (userImages[index]==UpdateProfileCubit.get(context).state.selectedImage)
                             ? BorderStyle.none
                             : BorderStyle.solid

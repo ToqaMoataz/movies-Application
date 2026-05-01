@@ -1,4 +1,3 @@
-import 'package:movie_app/Core/Models/Movie/TMBD%20Response%20Models/tmdb_movies_response_model.dart';
 import 'package:movie_app/Core/Models/Movie/YTS%20%20Response%20Models/yts_movie_response.dart';
 
 import '../Entities/movie_entity.dart';

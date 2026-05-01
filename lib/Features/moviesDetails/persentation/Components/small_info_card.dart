@@ -5,9 +5,9 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../../../../Core/Theme/app_colors.dart';
 
 class SmallInfoCard extends StatelessWidget {
-  SmallInfoCard({super.key,required this.icon,required this.info});
-  String info;
-  IconData icon;
+  const SmallInfoCard({super.key,required this.icon,required this.info});
+  final String info;
+  final IconData icon;
   @override
   Widget build(BuildContext context) {
     return Container(

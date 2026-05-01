@@ -1,4 +1,3 @@
-import 'package:movie_app/Core/Models/User/user_model.dart';
 
 abstract class UpdateProfileStates {}
 
@@ -15,7 +14,7 @@ class UpdateProfileState extends UpdateProfileStates {
     this.deleteProfileRequestState = RequestState.init,
     this.showImagesDialogRequestState = RequestState.init,
     this.showDialog = false,
-    this.selectedImage = "", // ✅ give it a default value
+    this.selectedImage = "",
     this.errorMessage,
   });
 

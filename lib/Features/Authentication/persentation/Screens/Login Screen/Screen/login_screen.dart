@@ -126,7 +126,7 @@ class _LoginScreenState extends State<LoginScreen>{
                                 Expanded(
                                   child: TextFormField(
                                     controller: _passwordController,
-                                    obscureText: state.passVisible,
+                                    obscureText: !state.passVisible,
                                     style: GoogleFonts.roboto(
                                       fontWeight: FontWeight.w400,
                                       fontSize: 16.sp,

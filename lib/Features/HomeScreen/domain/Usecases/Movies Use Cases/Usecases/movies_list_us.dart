@@ -1,7 +1,6 @@
 import 'package:injectable/injectable.dart';
 
 import '../../../../../../Core/Entities/movie_entity.dart';
-import '../../../../data/Repo Implementation/movie_remote_repo_imp.dart';
 import '../../../Abstract repo/movies_repo.dart';
 @injectable
 class GetMoviesByIDsUC {

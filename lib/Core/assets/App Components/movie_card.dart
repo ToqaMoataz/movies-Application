@@ -5,10 +5,10 @@ import 'package:movie_app/Core/Theme/app_colors.dart';
 import 'package:movie_app/Features/moviesDetails/persentation/Screen/movie_details_screen.dart';
 
 class MovieCard extends StatelessWidget {
-  String imgURL;
-  double rating;
-  int movieId;
-  MovieCard({super.key,required this.movieId,required this.rating,required this.imgURL});
+  final String imgURL;
+  final double rating;
+  final int movieId;
+  const MovieCard({super.key,required this.movieId,required this.rating,required this.imgURL});
 
   @override
   Widget build(BuildContext context) {

@@ -5,10 +5,10 @@ import 'package:movie_app/Core/Theme/app_colors.dart';
 import 'package:movie_app/Core/assets/App%20Images/app_images.dart';
 
 class CastComponent extends StatelessWidget {
-  CastComponent({super.key, this.imgUrl,required this.actorName,required this.characterName});
-  String? imgUrl;
-  String actorName;
-  String characterName;
+  const CastComponent({super.key, this.imgUrl,required this.actorName,required this.characterName});
+  final String? imgUrl;
+  final String actorName;
+  final String characterName;
   @override
   Widget build(BuildContext context) {
     return Container(

@@ -1,8 +1,5 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
 import 'package:movie_app/Features/Authentication/data/data%20source/data%20source.dart';
-
-import '../../../../Core/Firebase/firebase_manager.dart';
 import '../../../../Core/Models/User/user_model.dart';
 import '../../domain/Apstract Repo/repo.dart';
 

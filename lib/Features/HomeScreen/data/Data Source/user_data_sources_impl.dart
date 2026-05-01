@@ -17,7 +17,7 @@ class UserDataSourcesImpl extends UserDataSources{
       final snapshot = await docRef.get();
       final user = snapshot.data();
       return user;
-    } on FirebaseAuthException catch (e) {
+    } on FirebaseAuthException {
       rethrow;
     }
   }
@@ -39,7 +39,6 @@ class UserDataSourcesImpl extends UserDataSources{
       await FirebaseAuth.instance.signOut();
 
     } catch (e) {
-      print("Error during sign out: ${e.toString()}");
       rethrow;
     }
   }
